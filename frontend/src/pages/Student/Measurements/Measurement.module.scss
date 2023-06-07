@@ -1,0 +1,73 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    width: 100%;
+    flex-wrap: wrap;
+    .title {
+        color: var(--color-text);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        &:first-letter {
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+
+    table {
+        thead {
+            background-color: var(--color-background-squares);
+            color: var(--color-text);
+        }
+
+        tfoot {
+            background-color: var(--color-background-squares);
+            color: var(--color-text);
+        }
+
+        th,
+        td {
+            padding: 10px;
+            color: var(--color-text);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--color-background-squares);
+        }
+    }
+
+    .skeletonCell {
+        height: 1.2rem;
+        width: 100px;
+
+        background: linear-gradient(
+            to right,
+            rgba(102, 102, 102, 0.2) 0%,
+            rgba(153, 153, 153, 0.2) 50%,
+            rgba(102, 102, 102, 0.2) 20%,
+            rgba(153, 153, 153, 0.2) 30%,
+            rgba(102, 102, 102, 0.2) 40%,
+            rgba(153, 153, 153, 0.2) 50%,
+            rgba(102, 102, 102, 0.2) 60%,
+            rgba(153, 153, 153, 0.2) 80%,
+            rgba(102, 102, 102, 0.2) 80%,
+            rgba(153, 153, 153, 0.2) 90%,
+            rgba(102, 102, 102, 0.2) 100%
+        );
+        border-radius: 4px;
+        animation: shimmer 5s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -300px 0;
+        }
+        100% {
+            background-position: 300px 0;
+        }
+    }
+}

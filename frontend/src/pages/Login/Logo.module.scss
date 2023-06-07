@@ -1,0 +1,65 @@
+.circleContainer {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-background-squares);
+
+    --width-halfCircle: 18vw;
+    --height-halfCircle: calc(var(--width-halfCircle) / 2);
+    @media screen and (max-width: 1100px) {
+        --width-halfCircle: 12rem;
+    }
+    @media screen and (max-width: 730px) {
+        --width-halfCircle: 13vw;
+        min-height: unset;
+        background: unset;
+    }
+    @media screen and (max-width: 500px) {
+        --width-halfCircle: 4rem;
+    }
+    .circleTop {
+        width: var(--width-halfCircle);
+        height: var(--height-halfCircle);
+        border-radius: 50% 50% 50% 50% / 100% 100% 0 0;
+        background: var(--color-purple-600);
+        transform: translateY(1px);
+    }
+    .circleBtm {
+        position: relative;
+        width: var(--width-halfCircle);
+        height: var(--height-halfCircle);
+        border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+        background: var(--color-purple-600);
+        filter: blur(1.2rem);
+        transform: translateY(-1px);
+        @media screen and (max-width: 730px) {
+            filter: blur(0.65rem);
+        }
+        .inner {
+            position: absolute;
+            content: "";
+            --plusWidth: 6vw;
+            top: 0;
+            left: calc((-1) * var(--plusWidth) / 2);
+            width: calc(var(--width-halfCircle) + var(--plusWidth));
+            height: 13vw;
+            border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+            background: rgba(204, 204, 204, 0.823);
+            filter: blur(3rem);
+            @media screen and (max-width: 730px) {
+                filter: blur(8rem);
+            }
+            &::before {
+                position: absolute;
+                width: 150%;
+                top: 0;
+                left: -25%;
+                border-top: 1rem solid rgb(255, 255, 255);
+                content: "";
+            }
+        }
+    }
+}

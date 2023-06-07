@@ -1,0 +1,135 @@
+//Media Query
+$sideNavbarDisappear: 610px;
+$mobileNavbarAppear: 610px;
+
+//PADDING
+$sideNavbarPadding: 1.2rem;
+
+//WIDTH
+$sideNavbarWidthLg: 14rem;
+$sideNavbarWidthMd: 10rem;
+
+//ICONS
+$sideNavbarIconSize: 1.8rem;
+$sideNavbarIconPadding: 0.6rem;
+
+.navLink {
+    .active {
+        background: rgb(15, 23, 42);
+
+        svg {
+            color: rgb(85, 79, 232);
+        }
+    }
+
+    a {
+        display: flex;
+        flex: 1 1;
+        align-items: center;
+        text-decoration: none;
+        padding: $sideNavbarIconPadding;
+        border-radius: 8px;
+        margin-bottom: 0.6rem;
+        transition: background-color ease-in-out 300ms;
+        &:hover,
+        &:focus {
+            background: rgb(15, 23, 42);
+            svg {
+                color: rgb(85, 79, 232);
+            }
+        }
+        &:focus-visible {
+            outline: 2px solid white;
+            outline-offset: -2px;
+        }
+
+        span {
+            display: block;
+            margin-left: 0.5rem;
+            font-size: 1em;
+            color: var(--color-white-300);
+            font-weight: 400;
+            transform: translateY(1px);
+        }
+        svg {
+            width: $sideNavbarIconSize;
+            height: $sideNavbarIconSize;
+            color: var(--color-white-300);
+            flex-shrink: 0;
+        }
+    }
+}
+
+.navContainer {
+    position: relative;
+    // z-index: 100;
+    min-width: max-content;
+    background: rgb(30, 41, 59);
+    height: 100vh;
+    padding: 0.8rem $sideNavbarPadding;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+
+    @media screen and (max-width: $sideNavbarDisappear) {
+        display: none;
+    }
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    nav {
+        overflow-x: hidden;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        transition: width linear 0.3s;
+        flex-shrink: 0;
+        @media screen and (max-width: 768px) {
+            width: $sideNavbarWidthMd;
+        }
+    }
+}
+
+.navSmall {
+    nav {
+        width: calc($sideNavbarIconSize + $sideNavbarIconPadding * 2);
+    }
+    a {
+        .description {
+            opacity: 0;
+            margin: 0;
+        }
+    }
+}
+
+.navBig {
+    nav {
+        width: $sideNavbarWidthLg;
+    }
+}
+
+.navControl {
+    padding: $sideNavbarIconPadding;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    background: rgb(15, 23, 42);
+    border-radius: 8px;
+    line-height: 0;
+    width: min-content;
+    &:focus-visible {
+        outline: 2px solid white;
+        outline-offset: -2px;
+    }
+
+    svg {
+        color: var(--color-white-300);
+        width: $sideNavbarIconSize;
+        height: $sideNavbarIconSize;
+    }
+}
+
+.logout {
+    margin-top: auto;
+}

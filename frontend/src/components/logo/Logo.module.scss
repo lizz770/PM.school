@@ -1,0 +1,53 @@
+.container {
+    line-height: 0;
+    width: max-content;
+    &:focus-within {
+        outline: 2px solid var(--color-btn);
+    }
+}
+
+.circleContainer {
+    --width-halfCircle: 2rem;
+    --height-halfCircle: calc(var(--width-halfCircle) / 2);
+}
+
+.circleTop {
+    width: var(--width-halfCircle);
+    height: var(--height-halfCircle);
+    border-radius: 50% 50% 50% 50% / 100% 100% 0 0;
+    background: var(--color-purple-600);
+    transform: translateY(1px);
+}
+.circleBtm {
+    position: relative;
+    width: var(--width-halfCircle);
+    height: var(--height-halfCircle);
+    border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+    background: var(--color-purple-600);
+    filter: blur(0.35rem);
+    transform: translateY(-1px);
+
+    .inner {
+        position: absolute;
+        pointer-events: none;
+        content: "";
+        --plusWidth: 2rem;
+        top: 0;
+        left: calc((-1) * var(--plusWidth) / 2);
+        width: calc(var(--width-halfCircle) + var(--plusWidth));
+        height: 13vw;
+        max-height: 100px;
+        border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+        background: rgba(204, 204, 204, 0.823);
+
+        filter: blur(20rem);
+        &::before {
+             position: absolute;
+             width: 150%;
+             top: 0;
+             left: -25%;
+             border-top: 1rem solid rgb(255, 255, 255);
+             content: "";
+         }
+    }
+}

@@ -1,0 +1,117 @@
+@use "../../style/shared";
+
+.li_navlink {
+    .active {
+        background: rgb(15, 23, 42);
+
+        svg {
+            color: rgb(85, 79, 232);
+        }
+    }
+
+    a {
+        display: flex;
+        flex: 1 1;
+        align-items: center;
+        text-decoration: none;
+        padding: shared.$sideNavbarIconPadding;
+        border-radius: 8px;
+        margin-bottom: 0.6rem;
+        transition: all ease-in-out 300ms;
+        &:hover,
+        &:focus {
+            background: rgb(15, 23, 42);
+
+            svg {
+                color: rgb(85, 79, 232);
+            }
+        }
+
+        span {
+            display: block;
+            margin-left: 0.5rem;
+            font-size: 1rem;
+            color: var(--color-white-300);
+            font-weight: 400;
+            transform: translateY(1px);
+        }
+        svg {
+            width: shared.$sideNavbarIconSize;
+            height: shared.$sideNavbarIconSize;
+            color: var(--color-white-300);
+            flex-shrink: 0;
+        }
+    }
+}
+
+.container {
+    display: none;
+    transform: translateX(-100%);
+    transition: transform 250ms ease-in-out;
+    @media screen and (max-width: shared.$mobileNavbarAppear) {
+        display: block;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        height: 100vh;
+        background: rgb(30, 41, 59);
+        padding: 1rem;
+    }
+    nav {
+        width: 12rem;
+        overflow-x: hidden;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        transition: width linear 0.3s;
+        flex-shrink: 0;
+    }
+}
+
+.bg {
+    width: 0vw;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.25);
+    top: 0;
+    left: 14rem;
+    transition: width 350ms linear;
+    transition-delay: 150ms;
+    pointer-events: none;
+}
+
+.navActive {
+    transform: translateX(0);
+    .bg {
+        width: 100vw;
+        pointer-events: all;
+    }
+}
+
+.FaTimes {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: shared.$sideNavbarIconPadding;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+    border-radius: 50%;
+    background: var(--color-blue-900);
+    width: min-content;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        svg {
+            color: var(--color-purple-600);
+        }
+    }
+
+    svg {
+        transition: color 250ms ease-in-out;
+        width: shared.$sideNavbarIconSize;
+        height: shared.$sideNavbarIconSize;
+        color: var(--color-white-300);
+        flex-shrink: 0;
+    }
+}

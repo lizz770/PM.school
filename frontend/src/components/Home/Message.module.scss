@@ -1,0 +1,61 @@
+.helloMessage {
+    background:var(--color-lightBackground);
+    padding: 2rem;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+
+.refetch{
+    cursor:pointer;
+    background:transparent;
+    color:var(--color-text);
+    transition:color ease 150ms;
+    &:hover{
+        color:var(--color-hover-link);
+    }
+}
+
+.hello {
+    display:flex;
+    flex-shrink:0;
+    align-items:center;
+    gap:0.5rem;
+
+    @media screen and (max-width:355px){
+        flex-direction: column;
+        gap:0;
+        align-items:flex-start;
+    }
+
+    span {
+        font-size:1.8rem;
+        font-weight: 700;
+        color:var(--color-text);
+        &::first-letter{
+            text-transform: uppercase;
+        }
+    }
+
+    .userIcon{
+        display:flex;
+        align-items:center;
+    }
+
+    svg{
+        --size:1.75rem;
+        margin-left:0.5rem;
+        width:var(--size);
+        height: var(--size);
+        color: var(--color-text);
+        flex-shrink: 0;
+    }
+}
+.review {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color:var(--color-text);
+}

@@ -1,0 +1,151 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    user-select: none;
+    overflow-x: hidden;
+    background: var(--color-background-inner);
+
+    @media screen and (max-width: 730px) {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 0 1.2rem;
+        .registerContainer {
+            padding-top: 0rem;
+            padding-bottom: 2rem;
+        }
+        .circleContainer {
+            padding-top: 3rem;
+            padding-bottom: 0rem;
+        }
+    }
+}
+
+.form {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    .inner {
+        text-align: start;
+        width: max(25vw, 400px);
+        max-width: 500px;
+        @media screen and (max-width: 930px) {
+            padding: 0 2rem;
+        }
+        @media screen and (max-width: 400px) {
+            width: auto;
+            padding: 0;
+        }
+    }
+
+    .formWrapper {
+        margin-top: 2rem;
+    }
+}
+
+.message {
+    @media screen and (max-width: 730px) {
+        text-align: center;
+    }
+    span {
+        display: block;
+        font-size: max(2.3vw, 2.2rem);
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+        color: var(--color-text);
+        @media screen and (min-width: 2500px) {
+            font-size: 4rem;
+        }
+    }
+    p {
+        font-size: max(0.8vw, 0.9rem);
+        color: var(--color-grey-300);
+    }
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    --fontSize: max(0.65vw, 0.8rem);
+    @media screen and (min-width: 3000px) {
+        --fontSize: 1.5rem;
+    }
+    @media screen and (max-width: 335px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    .remember {
+        display: flex;
+        align-items: center;
+        &:focus-within {
+            outline: none;
+            box-shadow: 0 0 0 1px var(--color-purple-600);
+        }
+        label {
+            font-size: var(--fontSize);
+            font-weight: 400;
+            color: var(--color-text);
+        }
+        input {
+            margin-right: 0.3rem;
+            --size: 18px;
+            width: var(--size);
+            height: var(--size);
+            accent-color: var(--color-purple-600);
+            &:hover,
+            &:focus {
+                cursor: pointer;
+            }
+        }
+    }
+    .forgotPw {
+        &:focus-within {
+            outline: none;
+            box-shadow: 0 0 0 1px var(--color-purple-600);
+        }
+        a {
+            text-decoration: none;
+            color: var(--color-purple-600);
+            font-weight: 500;
+            font-size: var(--fontSize);
+            transition: color 250ms ease-in-out;
+            &:hover,
+            &:focus {
+                color: var(--color-hover-link);
+            }
+        }
+    }
+}
+
+.btnContainer {
+    margin-top: 1.5rem;
+    &:focus-within {
+        outline: none;
+        box-shadow: 0 0 0 1px var(--color-purple-600);
+    }
+}
+
+.noAccount {
+    margin-top: 1rem;
+    text-align: center;
+    span {
+        color: var(--color-grey-300);
+        font-size: max(0.5vw, 0.8rem);
+        a {
+            color: var(--color-purple-600);
+            text-decoration: none;
+            transition: color 250ms ease-in-out;
+            &:hover,
+            &:focus {
+                color: var(--color-hover-link);
+                outline: none;
+                box-shadow: 0 0 0 1px var(--color-purple-600);
+            }
+        }
+    }
+}

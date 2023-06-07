@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+  userId    String?
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  firstName    String
+  lastName     String
+  password     String
+  role         Role     @default(USER)
+  userRole     UserRole
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Measurements Measurements[]
+}
+
+model Mediadesign {
+  id             String   @id @default(cuid())
+  title          String 
+  description    String
+  image          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
+  measurementsId String?
+}
+
+model PhotoProduction {
+  id             String   @id @default(cuid())
+  title          String 
+  description    String
+  image          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
+  measurementsId String?
+}
+
+model VideoProduction {
+  id             String   @id @default(cuid())
+  title          String 
+  description    String
+  video          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
+  measurementsId String?
+}
+
+model Measurements {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  Mediadesign       Mediadesign[]
+  PhotoProduction   PhotoProduction[]
+  VideoProduction   VideoProduction[]
+  user              User? @relation(fields:[userId],references:[id])
+  userId            String?
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserRole {
+  TUTOR
+  STUDENT
+}

@@ -1,0 +1,109 @@
+.container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 1420px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.outer {
+    border-radius: 12px;
+    background: var(--color-background-squares);
+    box-shadow: 5px 5px 15px -1px rgb(0 0 0 / 22%);
+    padding: 1.8rem 0rem;
+    transition: background 200ms ease;
+    transition: transform 300ms ease;
+    width: 360px;
+    @media screen and (max-width: 1420px) {
+        width: unset;
+    }
+}
+
+.inner {
+    padding-left: 2.3rem;
+    width: 100%;
+}
+
+.valueContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    --icon-size: 2.4rem;
+    .iconContainer {
+        line-height: 0;
+        padding: 0.3rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        svg {
+            width: var(--icon-size);
+            height: var(--icon-size);
+        }
+    }
+    .value {
+        font-size: 1.5rem;
+    }
+}
+.title {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: var(--color-text);
+}
+.info {
+    font-size: 0.8rem;
+    color: var(--color-text-sm);
+    width: 80%;
+    line-height: 1.3;
+}
+
+.designContainer {
+    --bg: rgb(252, 240, 242);
+    --svg-clr: rgb(216, 97, 93);
+    .value {
+        color: var(--svg-clr);
+        font-weight: 500;
+    }
+    .iconContainer {
+        background: var(--bg);
+        svg {
+            color: var(--svg-clr);
+        }
+    }
+}
+
+.photoContainer {
+    --bg: rgb(238, 243, 252);
+    --svg-clr: rgb(114, 153, 236);
+    .value {
+        color: var(--svg-clr);
+        font-weight: 500;
+    }
+    .iconContainer {
+        background: var(--bg);
+        svg {
+            color: var(--svg-clr);
+        }
+    }
+}
+
+.videoContainer {
+    --bg: rgb(252, 240, 242);
+    --svg-clr: rgb(216, 97, 93);
+    @media screen and (max-width: 1250px) {
+        width: 100%;
+    }
+
+    .value {
+        color: var(--svg-clr);
+        font-weight: 500;
+    }
+    .iconContainer {
+        background: var(--bg);
+        svg {
+            color: var(--svg-clr);
+        }
+    }
+}
