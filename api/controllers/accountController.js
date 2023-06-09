@@ -1,10 +1,12 @@
+
+//регистрация
 import registerService from "../services/accountServices/registerService.js";
 import loginService from "../services/accountServices/loginService.js";
-import whoAmIService from "../services/accountServices/whoAmlService.js";
+import whoAmIService from "../services/accountServices/whoAmIService.js";
 import logoutService from "../services/accountServices/logoutService.js";
 import deleteAccountService from "../services/accountServices/deleteAccountService.js";
 import homeStatsService from "../services/accountServices/homeStatsService.js";
-
+import changePasswordService from "../services/accountServices/changePasswordService.js";
 
 const register = async (req, res, next) => {
   await registerService(req, res, next);
@@ -39,6 +41,7 @@ export {
   login,
   getAccountInfo,
   logout,
+  changePassword,
   deleteAccount,
   getHomeStats,
 };

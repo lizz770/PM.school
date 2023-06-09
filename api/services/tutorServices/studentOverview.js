@@ -57,7 +57,7 @@ const studentOverviewService = async (req, res, next) => {
       return res.status(200).json({ ...studentInfo });
     } else return res.status(400).json({ message: "Студент не найден" });
   } catch (e) {
-    return res.status(400).json({ message: "Что-то пошло не так" });
+    return res.status(400).json({ message: "Что-то пошло не так в studentOverview" });
   }
 };
 

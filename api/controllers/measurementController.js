@@ -1,50 +1,53 @@
-import * as MediaDesignService from "../services/studentServices/measurementServices/MediaDesignService.js";
-import * as PhotoProductionService from "../services/studentServices/measurementServices/PhotoProductionService.js"
-import * as VideoProductionService from "../services/studentServices/measurementServices/VideoProductionService.js"
+import * as mediadesignServices from "../services/studentServices/measurementServices/MediaDesignService.js";
+import * as photoProductionServices from "../services/studentServices/measurementServices/PhotoProductionService.js";
+import * as videoProductionServices from "../services/studentServices/measurementServices/VideoProductionService.js";
 
-//ПОСТ
-const postMediaDesign = async(req,res)=>{
-    await MediaDesignService.postMediaDesign(req,res);
-};
-const postPhotoProduction = async(req,res)=>{
-    await PhotoProductionService.postPhotoProduction(req,res);
-};
-const postVideoProduction = async(req,res)=>{
-    await VideoProductionService.postVideoProduction(req,res);
+const postMediadesign = async (req, res, next) => {
+  await mediadesignServices.postMediadesign(req, res, next);
 };
 
-//Гет
-const getMediaDesign = async(req, res, next)=>{
-    await MediaDesignService.getMediaDesign(req, res, next);
-};
-const getPhotoProduction = async(req, res, next)=>{
-    await PhotoProductionService.getPhotoProduction(req, res, next);
-};
-const getVideoProduction = async(req, res, next)=>{
-    await VideoProductionService.getVideoProduction(req, res, next);
+const getMediadesign = async (req, res, next) => {
+  await mediadesignServices.getMediadesign(req, res, next);
 };
 
-//delete
-const deleteMediaDesign = async(req, res, next)=>{
-    await MediaDesignService.deleteMediaDesign(req, res, next);
+const deleteMediadesign = async (req, res, next) => {
+  await mediadesignServices.deleteMediadesign(req, res, next);
 };
-const deletePhotoProduction = async(req, res, next)=>{
-    await PhotoProductionService.deletePhotoProduction(req, res, next);
+
+const postPhotoProduction = async (req, res, next) => {
+  await photoProductionServices.postPhotoProduction(req, res, next);
 };
-const deleteVideoProduction = async(req, res, next)=>{
-    await VideoProductionService.deleteVideoProduction(req, res, next);
+
+const getPhotoProduction = async (req, res, next) => {
+  await photoProductionServices.getPhotoProduction(req, res, next);
+};
+
+const deletePhotoProduction = async (req, res, next) => {
+  await photoProductionServices.deletePhotoProduction(req, res, next);
+};
+
+const postVideoProduction = async (req, res, next) => {
+  await videoProductionServices.postVideoProduction(req, res, next);
+};
+
+const getVideoProduction = async (req, res, next) => {
+  await videoProductionServices.getVideoProduction(req, res, next);
+};
+
+const deleteVideoProduction = async (req, res, next) => {
+  await videoProductionServices.deleteVideoProduction(req, res, next);
 };
 
 export {
-    postMediaDesign,
-    getMediaDesign,
-    deleteMediaDesign,
+  postMediadesign,
+  getMediadesign,
+  deleteMediadesign,
 
-    postPhotoProduction,
-    getPhotoProduction,
-    deletePhotoProduction,
-    
-    postVideoProduction,
-    getVideoProduction,
-    deleteVideoProduction,
+  postPhotoProduction,
+  getPhotoProduction,
+  deletePhotoProduction,
+  
+  postVideoProduction,
+  getVideoProduction,
+  deleteVideoProduction,
 };

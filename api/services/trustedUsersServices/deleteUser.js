@@ -51,7 +51,7 @@ const deleteUser = async (req, res, next) => {
     }
   }
 
-  return res.status(400).json({ error: "Что-то пошло не так" });
+  return res.status(400).json({ error: "Что-то пошло не так deletuser" });
 };
 
 export default deleteUser;

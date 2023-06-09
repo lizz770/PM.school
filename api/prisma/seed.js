@@ -45,10 +45,10 @@ const seed = async () => {
 
     
 
-    console.log(`User created: ${JSON.stringify(user)}`);
+    console.log(`Пользователь создан: ${JSON.stringify(user)}`);
   } catch (e) {
     console.log(e);
-    console.log(`Error seeding database`);
+    console.log(`Ошибка заполнения базы данных`);
   }
 };
 

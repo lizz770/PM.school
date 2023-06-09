@@ -1,17 +1,19 @@
 import express from "express";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import expressSession from "express-session";
-import cors from "cors";
+
 import prisma from "./constants/config.js";
+
+import cors from "cors";
 import accountRoutes from "./routes/accountRoutes.js";
+import requestRoutes from "./routes/requestRoutes.js";
+import trustedUsersRoutes from "./routes/trustedUsersRoutes.js";
+import tutorRoutes from "./routes/tutorRoutes.js";
 import studentRoutes from "./routes/studentRouters.js";
-
-
 
 const app = express();
 const PORT = 3000;
 
-//SETUP CORS
 app.use(
   cors({
     origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -20,7 +22,6 @@ app.use(
   })
 );
 
-//SETUP SESSION
 app.use(
   expressSession({
     cookie: {
@@ -42,13 +43,16 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", accountRoutes);
-app.use("/api", studentRoutes);
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
-app.listen(PORT, (err) => {
-  if (err) console.log(err);
-  console.log(`Server is running on port ${PORT}`);
+app.use("/api", accountRoutes);
+app.use("/api", requestRoutes);
+app.use("/api", trustedUsersRoutes);
+app.use("/api", studentRoutes);
+app.use("/api", tutorRoutes);
+
+app.listen(PORT, (error) => {
+  if (error) {
+    console.log("Ошибка запуска сервера");
+  }
+  console.log("Server started on port", PORT);
 });

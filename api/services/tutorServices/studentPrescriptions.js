@@ -73,7 +73,7 @@ const getStudentPrescriptions = async (req, res, next) => {
   }
 };
 
-const poststudentPrescription = async (req, res, next) => {
+const postStudentPrescription = async (req, res, next) => {
   const { id, name, title, description,multimedia } = req.body;
 
   try {
@@ -121,7 +121,7 @@ const poststudentPrescription = async (req, res, next) => {
   }
 };
 
-const deletestudentPrescription = async (req, res, next) => {
+const deleteStudentPrescription = async (req, res, next) => {
   const { studentId, prescriptionId } = req.query;
   if (!studentId || !prescriptionId) {
     return res
@@ -178,6 +178,6 @@ const deletestudentPrescription = async (req, res, next) => {
 
 export {
   getStudentPrescriptions,
-  deletestudentPrescription,
-  poststudentPrescription,
+  deleteStudentPrescription,
+  postStudentPrescription,
 };

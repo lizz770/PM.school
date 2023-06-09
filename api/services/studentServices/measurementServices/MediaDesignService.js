@@ -1,6 +1,6 @@
 import prisma from "../../../constants/config.js"
 
-const postMediaDesign =async(req,res)=>{
+const postMediadesign =async(req,res)=>{
     const{userId}=req?.session;
     const{title, description, image}=req.body;
     let mesId; //индификатор изменений от пользователя
@@ -32,7 +32,7 @@ const postMediaDesign =async(req,res)=>{
 };
 
 
-const getMediaDesign = async (req, res, next) => {
+const getMediadesign = async (req, res, next) => {
     const { skip, take, orderBy, startDate, endDate } = req.query;
     const start = new Date(parseInt(startDate));
     const end = new Date(parseInt(endDate));
@@ -62,7 +62,7 @@ const getMediaDesign = async (req, res, next) => {
     }
 };
 
-const deleteMediaDesign = async (req, res, next) => {
+const deleteMediadesign = async (req, res, next) => {
     const { id } = req.query;
     if (!id) return res.status(400).json({ error: "Требуеться запрос id" });
   
@@ -83,4 +83,4 @@ const deleteMediaDesign = async (req, res, next) => {
     }
   };
 
-export {postMediaDesign, getMediaDesign, deleteMediaDesign};
+export {postMediadesign, getMediadesign, deleteMediadesign};

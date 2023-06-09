@@ -12,7 +12,7 @@ const isStudent = async (req, res, next) => {
     else return res.status(401).json({ message: "Вы не студент" });
   } catch (e) {
     console.log(e);
-    return res.status(401).json({ message: "Что-то пошло не так" });
+    return res.status(401).json({ message: "Что-то пошло не так isStudent" });
   }
 };
 
