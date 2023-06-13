@@ -1,15 +1,15 @@
 import { z } from "zod";
 
-const mediaDesignSchema = z.object({
+const mediadesignSchema = z.object({
   title: z
     .string()
-    .min(1, { message: "Отсутствует название заголовка" }),
+    .min(1, { message: "Требуется заголовок feedback" }),
   description: z
     .string()
     .min(1, { message: "Требуется описание" }),
   image: z
     .string()
+    .min(1, { message: "Требуется изображение" }),
 });
 
-export default mediaDesignSchema;
-
+export default mediadesignSchema;

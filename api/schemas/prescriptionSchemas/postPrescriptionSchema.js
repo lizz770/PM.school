@@ -1,15 +1,17 @@
 import { z } from "zod";
 
+
 const postPrescriptionSchema = z.object({
-  name:z.string(),
-  title: z
+  name: z
     .string()
-    .min(1, { message: "Требуеться название заголовка" }),
+    .min(1, { message: "Требуется заголовок feedback" }),
   description: z
     .string()
-    .min(1, { message: "Требуеться описание" }),
-  id: z.string().min(1, { message: "Запрашивается  id студента" }),
-
+    .min(1, { message: "Требуется описание" }),
+  multimedia: z
+    .string()
+    .min(1, { message: "Требуется изображени/видео" }),
+  id: z.string().min(1, { message: "Требуется id студента" }),
 });
 
 export default postPrescriptionSchema;
