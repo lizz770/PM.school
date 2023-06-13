@@ -9,10 +9,10 @@ const isTutor = async (req, res, next) => {
     });
 
     if (isTutor?.userRole === "TUTOR" && isTutor?.id) next();
-    else return res.status(401).json({ message: "Вы не являетесь куратором" });
+    else return res.status(401).json({ message: "You're not a Tutor" });
   } catch (e) {
     console.log(e);
-    return res.status(401).json({ message: "Что-то пошло не так isTutor" });
+    return res.status(401).json({ message: "Something Went Wrong" });
   }
 };
 

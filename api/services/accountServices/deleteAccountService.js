@@ -10,7 +10,7 @@ const deleteAccountService = async (req, res, next) => {
   } catch (e) {
     return res.status(400).json({ message: e?.message });
   }
-  res.status(200).json({ message: "Успешное удаление аккаунта" });
+  res.status(200).json({ message: "Аккаунт удален успешно" });
 };
 
 export default deleteAccountService;

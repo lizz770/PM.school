@@ -1,20 +1,22 @@
-const logoutService = async (req, res) => {
-    try {
-      if (req?.session?.userId) {
-        req.session.destroy();
-        return res.status(401).json({
-          message: "Выход из системы",
-        });
-      } else {
-        return res.status(401).json({
-          message: "Не вошли в систему",
-        });
-      }
-    } catch (e) {
+import prisma from "../../constants/config.js";
+
+const logoutService = async (req, res, next) => {
+  try {
+    if (req?.session?.userId) {
+      req.session.destroy();
       return res.status(401).json({
-        message: "Ошибка, что-то пошло нетак",
+        message: "Успешно вышли из системы",
+      });
+    } else {
+      return res.status(401).json({
+        message: "Уже вышли из системы",
       });
     }
-  };
-  
-  export default logoutService;
+  } catch (e) {
+    res.status(400).json({
+      message: "Что-то пошло не так в logoutService",
+    });
+  }
+};
+
+export default logoutService;

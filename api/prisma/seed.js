@@ -4,51 +4,118 @@ import bcrypt from "bcryptjs";
 
 const seed = async () => {
   try {
-    const emailExists = await prisma.user.findUnique({
-      where: {
-        email: "test@test.com",
-      },
+    await prisma.$transaction(async (tx) => {
+      const pw = bcrypt.hashSync("12345", 10);
+
+      const student = await tx.user.create({
+        data: {
+          firstName: "Алиса",
+          lastName: "Сфильская",
+          email: "alisSfilsc@gmail.com",
+          userRole: "STUDENT",
+          password: pw,
+        },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          password: true,
+        },
+      });
+
+      const medStudent = await tx.measurements.create({
+        data: {
+          user: {
+            connect: {
+              id: patient.id,
+            },
+          },
+        },
+      });
+
+      const hrs = await tx.mediadesign.createMany({
+        data: [
+          {
+            title: 60,
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 55 * 60000),
+          },
+          {
+            title: 70,
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 50 * 60000),
+          },
+          {
+            title: 80,
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 45 * 60000),
+          },
+          {
+            title: 55,
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 40 * 60000),
+          },
+        ],
+      });
+
+      const tps = await tx.photoProduction.createMany({
+        data: [
+          {
+            title: "Прекрасное и изящное фото",
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 55 * 60000),
+          },
+          {
+            title: "Прекрасное и изящное фото",
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 50 * 60000),
+          },
+          {
+            title:"Прекрасное и изящное фото",
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 45 * 60000),
+          },
+          {
+            title:"Прекрасное и изящное фото",
+            measurementsId: medStudent.id,
+            createdAt: new Date(new Date().getTime() - 40 * 60000),
+          },
+        ],
+      });
+
+      const tutor = await tx.user.create({
+        data: {
+          firstName: "tutor",
+          lastName: "tutorovich",
+          email: "tut@tut.com",
+          userRole: "TUTOR",
+          password: pw,
+        },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          password: true,
+        },
+      });
+
+      const relationship = await tx.userRelationship.create({
+        data: {
+          tutorId: tutor.id,
+          studentId: student.id,
+          senderId: tutor.id,
+          status: "ACCEPTED",
+        },
+      });
+
+      //TRANSACTION END
+      console.log(`Seeded database with: ${(student, tutor, relationship)}`);
     });
-
-    if (emailExists) {
-      console.log("test@test.com already exists");
-      return;
-    }
-
-    const pw = bcrypt.hashSync("12345", 10);
-
-    const user = await prisma.user.create({
-      data: {
-        firstName: "Teodor",
-        lastName: "Wrapper",
-        email: "test@test.com",
-        userRole: "STUDENT",
-        password: pw,
-      },
-      select: {
-        email: true,
-        firstName: true,
-        lastName: true,
-        password: true,
-      },
-    });
-
-    const mes=await prisma.measurements.create({
-        data:{
-            user:{
-                connect:{
-                    id:user.id,
-                }
-            }
-        }
-    });
-
-    
-
-    console.log(`Пользователь создан: ${JSON.stringify(user)}`);
   } catch (e) {
     console.log(e);
-    console.log(`Ошибка заполнения базы данных`);
+    console.log(`Error seeding database`);
   }
 };
 

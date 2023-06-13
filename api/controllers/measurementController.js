@@ -1,4 +1,4 @@
-import * as mediadesignServices from "../services/studentServices/measurementServices/MediaDesignService.js";
+import * as mediadesignServices from "../services/studentServices/measurementServices/MediadesignService.js";
 import * as photoProductionServices from "../services/studentServices/measurementServices/PhotoProductionService.js";
 import * as videoProductionServices from "../services/studentServices/measurementServices/VideoProductionService.js";
 
@@ -42,11 +42,9 @@ export {
   postMediadesign,
   getMediadesign,
   deleteMediadesign,
-
   postPhotoProduction,
   getPhotoProduction,
   deletePhotoProduction,
-  
   postVideoProduction,
   getVideoProduction,
   deleteVideoProduction,

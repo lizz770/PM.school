@@ -1,9 +1,10 @@
 import prisma from "../../../constants/config.js";
 
-const postVideoProduction = async (req, res, next) => {
-    const{userId}=req?.session;
-    const{title, description, video}=req.body;
-    let mesId; //индификатор изменений от пользователя
+const postVideoProduction = async (req, res) => {
+  const { title, description,video } = req.body;
+  const { userId } = req?.session;
+
+  let mesId; // measurement id для пользователя 
 
   try {
     mesId = await prisma.measurements.findFirst({
@@ -12,27 +13,26 @@ const postVideoProduction = async (req, res, next) => {
       },
     });
   } catch (e) {
-    res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 
   try {
     await prisma.videoProduction.create({
       data: {
-        title:title,
+        title: title,
         description:description,
         video:video,
         measurementsId: mesId?.id,
       },
     });
 
-    return res.status(200).json({ message: "Данные раздела videoProduction сохранены" });
+    res.status(200).json({ message: "videoProduction saved" });
   } catch (e) {
-    console.log(e);
-    res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 };
 
-const getVideoProduction = async (req, res, next) => {
+const getVideoProduction = async (req, res) => {
   const { skip, take, orderBy, startDate, endDate } = req.query;
   const start = new Date(parseInt(startDate));
   const end = new Date(parseInt(endDate));
@@ -51,36 +51,34 @@ const getVideoProduction = async (req, res, next) => {
         createdAt: startDate || endDate ? { gte: start, lte: end } : undefined,
       },
     });
-
     return res.status(200).json({
       videoProductions: videoProductions ? videoProductions.slice(0, take) : [],
       hasMore: videoProductions.length > parseInt(take ?? 1),
     });
-  } catch (e) {
-    console.log(e);
-    return res.status(500).json({ error: "Неверный ввод данных" });
+  } catch {
+    return res.status(500).json({ error: "Invalid Input" });
   }
 };
 
-const deleteVideoProduction = async (req, res, next) => {
+const deleteVideoProduction = async (req, res) => {
   const { id } = req.query;
-  if (!id) return res.status(400).json({ error: "Требуеться запрос id" });
+  if (!id) return res.status(400).json({ error: "id query is required" });
 
   try {
-    await prisma.videoProduction.deleteMany({
+    const hr = await prisma.videoProduction.deleteMany({
       where: {
         id: id,
         Measurements: {
-          userId: req.session.userId,
+          userId: req?.session?.userId,
         },
       },
     });
-
-    return res.status(200).json({ message: "Данные раздела VideoProduction удалены" });
+    if (hr.count === 0)
+      return res.status(400).json({ error: "videoProduction not found" });
+    return res.status(200).json({ message: "videoProduction deleted" });
   } catch (e) {
-    console.log(e);
-    return res.status(500).json({ error: "Неверный ввод данных" });
+    return res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 };
 
-export { postVideoProduction, getVideoProduction , deleteVideoProduction};
+export { postVideoProduction, getVideoProduction, deleteVideoProduction };

@@ -9,7 +9,7 @@ import accountRoutes from "./routes/accountRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import trustedUsersRoutes from "./routes/trustedUsersRoutes.js";
 import tutorRoutes from "./routes/tutorRoutes.js";
-import studentRoutes from "./routes/studentRouters.js";
+import studentRoutes from "./routes/studentRoutes.js";
 
 const app = express();
 const PORT = 3000;

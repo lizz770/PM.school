@@ -15,7 +15,7 @@ const getUsers = async (req, res, next) => {
       },
     });
   } catch (e) {
-    return res.status(400).json({ error: "Что-то пошло не так getUsers" });
+    return res.status(400).json({ error: "Что-то пошло не так с получением пользователя" });
   }
 
   try {
@@ -35,14 +35,14 @@ const getUsers = async (req, res, next) => {
     });
 
     if (loggedInUser.userRole === "STUDENT") {
-      const doctors = users?.map((user) => {
+      const tutors = users?.map((user) => {
         delete user.tutor.password;
         delete user.tutor.createdAt;
         delete user.tutor.updatedAt;
         return user.tutor;
       });
       return res.status(200).json({
-        users: doctors,
+        users: tutors,
       });
     } else {
       const students = users?.map((user) => {
@@ -56,7 +56,7 @@ const getUsers = async (req, res, next) => {
       });
     }
   } catch (e) {
-    return res.status(400).json({ error: "Что-то пошло не так getUsers" });
+    return res.status(400).json({ error: "Something Went Wrong" });
   }
 };
 

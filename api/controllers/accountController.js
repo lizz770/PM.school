@@ -1,5 +1,3 @@
-
-//регистрация
 import registerService from "../services/accountServices/registerService.js";
 import loginService from "../services/accountServices/loginService.js";
 import whoAmIService from "../services/accountServices/whoAmIService.js";

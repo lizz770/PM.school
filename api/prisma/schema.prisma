@@ -25,95 +25,56 @@ enum UserRole {
   STUDENT
 }
 
-model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  firstName    String
-  lastName     String
-  password     String
-  role         Role     @default(USER)
-  userRole     UserRole
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  Measurements Measurements[]
-
-  //отношения между пользователями
-  Students UserRelationship[] @relation("tutor")
-  Tutors   UserRelationship[] @relation("student")
-  Sender   UserRelationship[] @relation("sender")
-
-  //school
-  PrescribedBy PrescriptionFeedback[] @relation("prescriptionTutor")
-  PrescribedTo PrescriptionFeedback[] @relation("prescriptionStudent")
-
-  //настройки
-  Notifacation Notifacation[]
-}
-
 model Mediadesign {
-  id             String   @id @default(cuid())
-  title          String 
+  id             String        @id @default(cuid())
+  title          String
   description    String
-  image          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  image          String?  
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
   measurementsId String?
 }
 
 model PhotoProduction {
-  id             String   @id @default(cuid())
-  title          String 
-  description    String
-  image          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
-  measurementsId String?
+  id               String        @id @default(cuid())
+  title            String
+  description      String
+  image            String? 
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  Measurements     Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
+  measurementsId   String?
 }
 
 model VideoProduction {
-  id             String   @id @default(cuid())
-  title          String 
+  id             String        @id @default(cuid())
+  title          String
   description    String
-  video          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  video          String? 
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   Measurements   Measurements? @relation(fields: [measurementsId], references: [id], onDelete: Cascade)
   measurementsId String?
 }
 
+
 model Measurements {
-  id                String   @id @default(cuid())
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  Mediadesign       Mediadesign[]
-  PhotoProduction   PhotoProduction[]
-  VideoProduction   VideoProduction[]
-  user              User? @relation(fields:[userId],references:[id])
-  userId            String?
+  id                 String          @id @default(cuid())
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  Mediadesign        Mediadesign[]
+  PhotoProduction    PhotoProduction[]
+  VideoProduction    VideoProduction[]
+  user               User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String?
 }
 
-model UserRelationship {
-  id                      String                 @id @default(cuid())
-  createdAt               DateTime               @default(now())
-  updatedAt               DateTime               @updatedAt
-  tutor                   User                   @relation(fields: [tutorId], references: [id], name: "tutor", onDelete: Cascade)
-  tutorId                 String
-  student                 User                   @relation(fields: [studentId], references: [id], name: "student", onDelete: Cascade)
-  studentId               String
-  sender                  User                   @relation(fields: [senderId], references: [id], name: "sender", onDelete: Cascade)
-  senderId                String
-  PrescriptionFeedback    PrescriptionFeedback[]
-  status                  Status                 @default(PENDING)
-}
-
-model PrescriptionFeedback  {
+model PrescriptionFeedback {
   id                 String           @id @default(cuid())
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   name               String
-  title              String
   description        String
   multimedia         String?
   status             Status           @default(PENDING)
@@ -123,7 +84,37 @@ model PrescriptionFeedback  {
   prescribedById     String
   PrescribedTo       User             @relation(name: "prescriptionStudent", fields: [prescribedToId], references: [id], onDelete: Cascade)
   prescribedToId     String
-  
+}
+
+
+model UserRelationship {
+  id                   String                 @id @default(cuid())
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  tutor                User                   @relation(fields: [tutorId], references: [id], name: "tutor", onDelete: Cascade)
+  tutorId              String
+  student              User                   @relation(fields: [studentId], references: [id], name: "student", onDelete: Cascade)
+  studentId            String
+  sender               User                   @relation(fields: [senderId], references: [id], name: "sender", onDelete: Cascade)
+  senderId             String
+  PrescriptionFeedback PrescriptionFeedback[]
+  status               Status                 @default(PENDING)
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum NotifacationStatus {
+  READ
+  UNREAD
+}
+
+enum NotifacationType {
+  PRESCRIPTION
+  ACCESS
 }
 
 model Notifacation {
@@ -132,19 +123,35 @@ model Notifacation {
   updatedAt          DateTime           @updatedAt
   title              String
   message            String
-  NotifacationStatus NotifacationStatus @default(UNREAD) 
+  NotifacationStatus NotifacationStatus @default(UNREAD)
+  NotifacationType   NotifacationType
   User               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             String
 }
-enum NotifacationStatus {
-  READ
-  UNREAD
-}
 
-enum Status {
-  PENDING
-  ACCEPTED
-  REJECTED
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  firstName    String
+  lastName     String
+  password     String
+  role         Role           @default(USER)
+  userRole     UserRole
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Measurements Measurements[]
+
+  //Отношения между пользователями
+  Students UserRelationship[] @relation("tutor")
+  Tutors   UserRelationship[] @relation("student")
+  Sender   UserRelationship[] @relation("sender")
+
+  //фидбэк
+  PrescribedBy PrescriptionFeedback[] @relation("prescriptionTutor")
+  PrescribedTo PrescriptionFeedback[] @relation("prescriptionStudent")
+
+  //NOTIFACATIONS
+  Notifacation Notifacation[]
 }
 
 

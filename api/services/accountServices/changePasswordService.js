@@ -18,7 +18,7 @@ const changePasswordService = async (req, res) => {
         message: "Неверные учетные данные",
       });
     }
-    //проверить коректность пароля
+    //проверка пароля на коректность
     const passwordCorrect = await bcrypt.compare(
       currentPassword,
       user.password
@@ -31,10 +31,10 @@ const changePasswordService = async (req, res) => {
       });
     }
 
-    //хэширование password
+    //хэширование пароля
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    //обновите учетную запись
+    //обносить акк
     const account = await prisma.user.update({
       where: {
         id: userId,
@@ -48,11 +48,11 @@ const changePasswordService = async (req, res) => {
     req.session.destroy();
 
     res.status(401).json({
-      message: "Обновление пароля произошло успешно!",
+      message: "Пароль обновлен успешно",
     });
   } catch (error) {
     res.status(400).json({
-      message: "Что-то пошло не так в changePassword ",
+      message: "Что-то пошло не так в changePassword",
     });
   }
 };

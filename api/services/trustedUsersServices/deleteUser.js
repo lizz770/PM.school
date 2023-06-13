@@ -18,7 +18,7 @@ const deleteUser = async (req, res, next) => {
       },
     });
   } catch (e) {
-    return res.status(400).json({ error: "Что-то пошло не так deleteUser" });
+    return res.status(400).json({ error: "Something Went Wrong" });
   }
 
   if (loggedInUser.userRole === "STUDENT") {
@@ -30,10 +30,10 @@ const deleteUser = async (req, res, next) => {
         },
       });
 
-      return res.status(200).json({ message: "Куратор удален успешно" });
+      return res.status(200).json({ message: "tutor Deleted Successfully" });
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ error: "Что-то пошло не так deleteUser" });
+      return res.status(400).json({ error: "Something Went Wrong" });
     }
   }
   if (loggedInUser.userRole === "TUTOR") {
@@ -45,13 +45,13 @@ const deleteUser = async (req, res, next) => {
         },
       });
 
-      return res.status(200).json({ message: "Студент удален успешно" });
+      return res.status(200).json({ message: "student Deleted Successfully" });
     } catch (e) {
-      return res.status(400).json({ error: "Что-то пошло не так" });
+      return res.status(400).json({ error: "Something Went Wrong" });
     }
   }
 
-  return res.status(400).json({ error: "Что-то пошло не так deletuser" });
+  return res.status(400).json({ error: "Something Went Wrong" });
 };
 
 export default deleteUser;

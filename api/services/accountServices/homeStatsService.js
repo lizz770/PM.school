@@ -13,7 +13,7 @@ const homeStatsService = async (req, res, next) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(400).json({ error: "Что-то пошло не так в 1homeStatsService" });
+    res.status(400).json({ error: "Something Went Wrong" });
   }
 
   if (user.userRole === "STUDENT") {
@@ -63,7 +63,6 @@ const homeStatsService = async (req, res, next) => {
             select: {
               id: true,
               name: true,
-              title: true,
               description: true,
               multimedia: true,
               createdAt: true,
@@ -88,7 +87,7 @@ const homeStatsService = async (req, res, next) => {
       return res.status(200).json(allStats);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ error: "то-то пошло не так в 2homeStatsService" });
+      res.status(400).json({ error: "Что-то пошло не так в homeStatsService " });
     }
   }
 
@@ -128,11 +127,10 @@ const homeStatsService = async (req, res, next) => {
       const allStats = {
         Students: stats.Students,
         Prescriptions: stats.PrescribedBy,
-        Risks: stats.RiskBy,
       };
       return res.status(200).json(allStats);
     } catch (e) {
-      return res.status(400).json({ error: "Что-то пошло не так в 3homestats" });
+      return res.status(400).json({ error: "Something Went Wrong" });
     }
   }
 };

@@ -12,7 +12,7 @@ function validateRequestBody(schema) {
         acc[issue.path[0]].push(issue.message);
         return acc;
       }, {});
-      res.status(400).send({ error: "Инвалидный запрос к телу", details });
+      res.status(400).send({ error: "Инвалидный запрос к body", details });
     } else {
       next();
     }

@@ -21,9 +21,8 @@ const getTutorPrescriptions = async (req, res, next) => {
             status: true,
             createdAt: true,
             name: true,
-            title: true,
             description: true,
-            multimedia:true,
+            multimedia: true,
             PrescribedBy: {
               select: {
                 id: true,
@@ -49,7 +48,7 @@ const deleteTutorPrescription = async (req, res, next) => {
     if (!tutorId || !prescriptionId)
       return res
         .status(400)
-        .json({ message: "tutorId и FeedBackId запрашивается" });
+        .json({ message: "Требуются  id tutorId and PrescriptionId" });
 
     const prescription = await prisma.prescriptionFeedback.deleteMany({
       where: {
@@ -60,14 +59,14 @@ const deleteTutorPrescription = async (req, res, next) => {
     });
 
     if (prescription.count === 0)
-      return res.status(400).json({ message: "Фидбэк не найден" });
+      return res.status(400).json({ message: "Prescription not found" });
 
     return res
       .status(200)
-      .json({ message: `Риск с id ${prescriptionId} теперь удален` });
+      .json({ message: `Risk with id of ${prescriptionId} is now deleted` });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ message: "Внутренняя ошибка сервера" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -78,7 +77,7 @@ const patchTutorPrescription = async (req, res, next) => {
     if (!tutorId || !prescriptionId)
       return res
         .status(400)
-        .json({ message: "tutorId, PrescriptionId and Status запрашиваются" });
+        .json({ message: "tutorId, PrescriptionId and Status is required" });
 
     const prescription = await prisma.prescriptionFeedback.updateMany({
       where: {
@@ -93,13 +92,13 @@ const patchTutorPrescription = async (req, res, next) => {
     });
 
     if (prescription.count === 0)
-      return res.status(400).json({ message: "Фидбэк не найден" });
+      return res.status(400).json({ message: "Prescription not found" });
 
     return res.status(200).json({
-      message: `Фидбэк id от ${prescriptionId} теперь принят `,
+      message: `Prescription with id of ${prescriptionId} is now accepted`,
     });
   } catch (e) {
-    res.status(500).json({ message: "Внутренняя ошибка сервера" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

@@ -3,7 +3,7 @@ import prisma from "../../constants/config.js";
 const mediadesign = async (req, res, next) => {
   const { id, skip, take, orderBy, startDate, endDate } = req.query;
   if (!id) {
-    return res.status(400).json({ message: "Запрашиваеться id студента" });
+    return res.status(400).json({ message: "Требуется id студента" });
   }
 
   try {
@@ -15,8 +15,8 @@ const mediadesign = async (req, res, next) => {
       start.setHours(0, 0, 0, 0);
       end.setHours(23, 59, 59, 999);
     } else {
-      start = new Date(parseInt(startDate)); //милисекунды
-      end = new Date(parseInt(endDate)); //милисекунды
+      start = new Date(parseInt(startDate)); 
+      end = new Date(parseInt(endDate)); 
     }
 
     const student = await prisma.user.findMany({
@@ -35,7 +35,7 @@ const mediadesign = async (req, res, next) => {
         lastName: true,
         Measurements: {
           select: {
-            mediadesign: {
+            Mediadesign: {
               skip: parseInt(skip ?? 0),
               take: parseInt(take ? take + 1 : 2),
               orderBy: {
@@ -65,17 +65,17 @@ const mediadesign = async (req, res, next) => {
         hasMore: studentInfo.mediadesign.length > parseInt(take ?? 1),
       });
     } else {
-      return res.status(404).json({ message: "Студент не найден" });
+      return res.status(404).json({ message: "студент не найден" });
     }
   } catch (e) {
-    res.status(500).json({ error: "Инвалидный запрос" });
+    res.status(500).json({ error: "Инвалидный ввод данных" });
   }
 };
 
 const photoProduction = async (req, res, next) => {
   const { id, skip, take, orderBy, startDate, endDate } = req.query;
   if (!id) {
-    return res.status(400).json({ message: "Запрашиваеться id студента" });
+    return res.status(400).json({ message: "Требуется id студента" });
   }
 
   try {
@@ -87,8 +87,8 @@ const photoProduction = async (req, res, next) => {
       start.setHours(0, 0, 0, 0);
       end.setHours(23, 59, 59, 999);
     } else {
-      start = new Date(parseInt(startDate)); //милисекунды
-      end = new Date(parseInt(endDate)); //милисекунды
+      start = new Date(parseInt(startDate)); 
+      end = new Date(parseInt(endDate)); 
     }
 
     const student = await prisma.user.findMany({
@@ -137,17 +137,17 @@ const photoProduction = async (req, res, next) => {
         hasMore: studentInfo.photoProduction.length > parseInt(take ?? 1),
       });
     } else {
-      return res.status(404).json({ message: "Студент не найден" });
+      return res.status(404).json({ message: "student not found" });
     }
   } catch (e) {
-    res.status(500).json({ error: "Инвалидный запрос" });
+    res.status(500).json({ error: "Инвалидный ввод данных" });
   }
 };
 
 const videoProduction = async (req, res, next) => {
   const { id, skip, take, orderBy, startDate, endDate } = req.query;
   if (!id) {
-    return res.status(400).json({ message: "Запрашиваеться id студента" });
+    return res.status(400).json({ message: "Требуется id студента" });
   }
 
   try {
@@ -159,8 +159,8 @@ const videoProduction = async (req, res, next) => {
       start.setHours(0, 0, 0, 0);
       end.setHours(23, 59, 59, 999);
     } else {
-      start = new Date(parseInt(startDate)); //милисекунды
-      end = new Date(parseInt(endDate)); //милисекунды
+      start = new Date(parseInt(startDate)); 
+      end = new Date(parseInt(endDate)); 
     }
 
     const student = await prisma.user.findMany({
@@ -209,10 +209,10 @@ const videoProduction = async (req, res, next) => {
         hasMore: studentInfo.videoProduction.length > parseInt(take ?? 1),
       });
     } else {
-      return res.status(404).json({ message: "Студент не найден" });
+      return res.status(404).json({ message: "student not found" });
     }
   } catch (e) {
-    res.status(500).json({ error: "Инвалидный запрос" });
+    res.status(500).json({ error: "Инвалидный ввод данных" });
   }
 };
 

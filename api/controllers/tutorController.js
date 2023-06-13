@@ -18,16 +18,15 @@ const studentVideoProduction = async (req, res, next) => {
   await studentMeasurementServices.videoProduction(req, res, next);
 };
 
-
 const studentPrescriptions = async (req, res, next) => {
   await studentPrescriptionsServices.getStudentPrescriptions(req, res, next);
 };
 
-const postStudentPrescription = async (req, res, next) => {
+const poststudentPrescription = async (req, res, next) => {
   await studentPrescriptionsServices.postStudentPrescription(req, res, next);
 };
 
-const deleteStudentPrescription = async (req, res, next) => {
+const deletestudentPrescription = async (req, res, next) => {
   await studentPrescriptionsServices.deleteStudentPrescription(req, res, next);
 };
 
@@ -37,6 +36,6 @@ export {
   studentPhotoProduction,
   studentVideoProduction,
   studentPrescriptions,
-  postStudentPrescription,
-  deleteStudentPrescription,
+  poststudentPrescription,
+  deletestudentPrescription,
 };

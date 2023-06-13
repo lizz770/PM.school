@@ -9,10 +9,10 @@ const isStudent = async (req, res, next) => {
     });
 
     if (isStudent?.userRole === "STUDENT" && isStudent?.id) next();
-    else return res.status(401).json({ message: "Вы не студент" });
+    else return res.status(401).json({ message: "You're not a student" });
   } catch (e) {
     console.log(e);
-    return res.status(401).json({ message: "Что-то пошло не так isStudent" });
+    return res.status(401).json({ message: "Something Went Wrong" });
   }
 };
 

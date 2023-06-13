@@ -30,11 +30,11 @@ const deleteService = async (req, res, next) => {
           status: "PENDING",
         },
       });
-      return res.status(200).json({ message: "Удалить" });
+      return res.status(200).json({ message: "Deleted" });
     } catch (e) {
       return res
         .status(400)
-        .json({ error: `Невозможно удалить запрос с  ID: ${id}` });
+        .json({ error: `Cannot Delete Request with ID: ${id}` });
     }
   }
   if (loggedInUser.userRole === "TUTOR")
@@ -46,16 +46,16 @@ const deleteService = async (req, res, next) => {
           status: "PENDING",
         },
       });
-      return res.status(200).json({ message: "Удалить" });
+      return res.status(200).json({ message: "Deleted" });
     } catch (e) {
       return res
         .status(400)
-        .json({ error: `Невозможно удалить запрос с  ID: ${id}` });
+        .json({ error: `Cannot Delete Request with ID: ${id}` });
     }
   else {
     return res
       .status(400)
-      .json({ error: `Невозможно удалить запрос с  ID: ${id}` });
+      .json({ error: `Cannot Delete Request with ID: ${id}` });
   }
 };
 

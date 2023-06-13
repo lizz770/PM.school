@@ -3,7 +3,7 @@ import prisma from "../../constants/config.js";
 const getStudentPrescriptions = async (req, res, next) => {
   const { id, status, by } = req.query;
   if (!id) {
-    return res.status(400).json({ message: "Требуется id студента" });
+    return res.status(400).json({ message: "Student id is required" });
   }
 
   try {
@@ -36,7 +36,6 @@ const getStudentPrescriptions = async (req, res, next) => {
           select: {
             id: true,
             name: true,
-            title: true,
             description: true,
             multimedia: true,
             createdAt: true,
@@ -66,15 +65,15 @@ const getStudentPrescriptions = async (req, res, next) => {
     if (student?.length > 1) {
       return res.status(200).json({ student });
     }
-    return res.status(404).json({ message: "студент не найден" });
+    return res.status(404).json({ message: "student not found" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Внутренняя ошибка сервера" });
+    res.status(500).json({ message: "Внутрення ошибка сервера studentprescription" });
   }
 };
 
 const postStudentPrescription = async (req, res, next) => {
-  const { id, name, title, description,multimedia } = req.body;
+  const { id, name, description, multimedia } = req.body;
 
   try {
     const student = await prisma.user.findMany({
@@ -99,15 +98,14 @@ const postStudentPrescription = async (req, res, next) => {
     });
 
     if (!student.length) {
-      return res.status(404).json({ message: "студент не найден" });
+      return res.status(404).json({ message: "student not found" });
     }
 
     const prescriptionCreated = await prisma.prescriptionFeedback.create({
       data: {
-        title: title,
         description: description,
+        multimedia: multimedia,
         name: name,
-        multimedia:multimedia,
         prescribedById: req.session.userId,
         prescribedToId: id,
         userRelationshipId: student[0]?.Tutors[0]?.id,
@@ -117,7 +115,7 @@ const postStudentPrescription = async (req, res, next) => {
     return res.status(200).json(prescriptionCreated);
   } catch (e) {
     console.log(e);
-    res.status(500).json({ message: "Внутренняя ошибка сервера" });
+    res.status(500).json({ message: "внутренняя ошибка сервера" });
   }
 };
 
@@ -126,7 +124,7 @@ const deleteStudentPrescription = async (req, res, next) => {
   if (!studentId || !prescriptionId) {
     return res
       .status(400)
-      .json({ message: "student id и feedback id запрашиваются" });
+      .json({ message: "student id and prescription id are required" });
   }
 
   try {
@@ -152,7 +150,7 @@ const deleteStudentPrescription = async (req, res, next) => {
     });
 
     if (!student.length) {
-      return res.status(404).json({ message: "студент не найден" });
+      return res.status(404).json({ message: "student not found" });
     }
 
     const deletedPrescription = await prisma.prescriptionFeedback.deleteMany({
@@ -164,15 +162,15 @@ const deleteStudentPrescription = async (req, res, next) => {
     });
 
     if (!deletedPrescription.count) {
-      return res.status(404).json({ message: "Feedback не найден" });
+      return res.status(404).json({ message: "Prescription not found" });
     }
 
     return res.status(200).json({
-      message: `Feedback с id ${prescriptionId} теперь удален`,
+      message: `Prescription with id ${prescriptionId} is now deleted`,
     });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ message: "Внутренняя ошибка сервера" });
+    res.status(500).json({ message: "внутренняя ошибка сервера" });
   }
 };
 

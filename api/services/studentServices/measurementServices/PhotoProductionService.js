@@ -1,10 +1,10 @@
 import prisma from "../../../constants/config.js";
 
 const postPhotoProduction = async (req, res, next) => {
-    const{userId}=req?.session;
-    const{title, description, image}=req.body;
-    let mesId; //индификатор изменений от пользователя
+  const { title, description,image } = req.body;
+  const { userId } = req?.session;
 
+  let mesId;
   try {
     mesId = await prisma.measurements.findFirst({
       where: {
@@ -12,23 +12,23 @@ const postPhotoProduction = async (req, res, next) => {
       },
     });
   } catch (e) {
-    res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 
   try {
-    await prisma.photoProduction.create({
+    const newTp = await prisma.photoProduction.create({
       data: {
-        title:title,
+        title: title,
         description:description,
         image:image,
         measurementsId: mesId?.id,
       },
     });
 
-    return res.status(200).json({ message: "Данные раздела PhotoProduction сохранены" });
+    res.status(200).json({ message: "photoProduction saved", tp: newTp });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 };
 
@@ -58,29 +58,24 @@ const getPhotoProduction = async (req, res, next) => {
     });
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ error: "Неверный ввод данных" });
+    return res.status(500).json({ error: "Инвалидный ввод данных" });
   }
 };
 
 const deletePhotoProduction = async (req, res, next) => {
   const { id } = req.query;
-  if (!id) return res.status(400).json({ error: "Требуеться запрос id" });
+  if (!id) return res.status(400).json({ error: "Требуется запрос id" });
 
   try {
-    await prisma.photoProduction.deleteMany({
+    await prisma.photoProduction.delete({
       where: {
         id: id,
-        Measurements: {
-          userId: req.session.userId,
-        },
       },
     });
-
-    return res.status(200).json({ message: "Данные раздела PhotoProduction удалены" });
+    return res.status(200).json({ message: "photoProduction deleted" });
   } catch (e) {
-    console.log(e);
-    return res.status(500).json({ error: "Неверный ввод данных" });
+    return res.status(500).json({ error: "Внутрення ошибка сервера" });
   }
 };
 
-export { postPhotoProduction, getPhotoProduction , deletePhotoProduction};
+export { postPhotoProduction, getPhotoProduction, deletePhotoProduction };

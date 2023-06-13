@@ -95,7 +95,7 @@ const postService = async (req, res, next) => {
     }
   }
 
-  return res.status(400).json({ error: `Неавторизованная отправка запроса` });
+  return res.status(400).json({ error: `Неавторизированный запрос` });
 };
 
 export default postService;
