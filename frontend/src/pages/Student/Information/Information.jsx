@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Information.module.scss";
-import Table from "../../../components/Information/Table";
+import Table from "../../../components/information/Table";
 //фото
 import { HiOutlinePhotograph} from "react-icons/hi";
 //камера
 import { BsCameraVideo } from "react-icons/bs";
 //статьи дизайн
 import { MdDesignServices } from "react-icons/md";
-import GlobalSpinner from "../../../components/GlobalSpinner/GlobalSpinner";
+import GlobalSpinner from "../../../components/globalSpinner";
 import { useHomeStats } from "../../../queries/accountQueries";
 
 const Information = () => {
@@ -24,8 +24,9 @@ const Information = () => {
       ) : (
         <>
           <Table
+            title='Медиа Дизайн'
+            titleIcon={<MdDesignServices />}
             url='mediadesign'
-            titleIcon={< MdDesignServices/>}
             items={stats?.Mediadesign?.map((item) => {
               return {
                 value: item?.title,
@@ -39,10 +40,10 @@ const Information = () => {
             title='Фото Продакшн'
             titleIcon={<HiOutlinePhotograph />}
             url='photoProduction'
-            items={stats?.PhotoProduction?.map((item) => {
+            items={stats?.PhotoProduction.map((item) => {
               return {
                 value: item?.title,
-                unitColor:  "#6aa84f",
+                unitColor: "#6aa84f",
                 date: item?.updatedAt,
               };
             })}

@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "link": "/settings",
+        "text": "Настройки"
+    },
+    {
+        "id": 2,
+        "link": "/prescriptions",
+        "text": "FeedBack"
+    },
+    {
+        "id": 3,
+        "link": "/students",
+        "text": "Студенты"
+    },
+    {
+        "id": 4,
+        "link": "/info",
+        "text": "Информация пользователя"
+    },
+    {
+        "id": 5,
+        "link": "/stats",
+        "text": "Статистика"
+    }
+]

@@ -1,0 +1,46 @@
+.container {
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    color: var(--color-text);
+}
+
+.loading {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userWrapper {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .name {
+        font-size: 1rem;
+        color: var(--color-text);
+    }
+
+    .email {
+        font-size: 1.25rem;
+        color: var(--color-grey-300);
+        font-size: 1rem;
+    }
+}

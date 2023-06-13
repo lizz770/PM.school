@@ -1,0 +1,158 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pending {
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+        font-size: 1.1rem;
+        color: var(--color-text);
+        font-weight: 500;
+    }
+
+    .noRequests {
+        display: flex;
+        color: var(--color-text);
+    }
+}
+
+.pendingRequest {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-grey-100);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+    padding: 0.5rem;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 4px;
+    }
+
+    .btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .requestInfo {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .requestedBy {
+            color: var(--color-text);
+        }
+
+        .requestStatus {
+            color: var(--color-grey-300);
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+
+    .loading {
+        display: flex;
+        width: 40px;
+        svg {
+            animation: spin 1s linear infinite;
+            color: black;
+        }
+    }
+
+    .input {
+        display: flex;
+        flex-direction: column;
+        label {
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+
+        .inner {
+            @media screen and (max-width: 768px) {
+                width: 100%;
+                max-width: unset;
+            }
+            background-color: white;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            max-width: 300px;
+            gap: 10px;
+            &:focus-within {
+                border-color: black;
+            }
+        }
+
+        input {
+            display: inline-block;
+            height: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 40px;
+            color: #555;
+            cursor: pointer;
+
+            width: 100%;
+            border-radius: 4px;
+        }
+    }
+}
+
+.users {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.user {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "user_name user_role user_role";
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    padding: 10px;
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "user_name" "user_role" "user_role";
+        align-items: left;
+        justify-items: left;
+    }
+
+    .user_name {
+        font-size: 16px;
+        color: var(--color-text);
+    }
+
+    .user_role {
+        font-size: 14px;
+        color: var(--color-text);
+    }
+}

@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { FaTimes } from "react-icons/fa";
 import styles from "./PostModal.module.scss";
 import { usePostMeasurement } from "../../../queries/measurementQueries";
-import Button from "../../../components/Button";
+import Button from "../../../components/button";
 
 Modal.setAppElement("#root");
 

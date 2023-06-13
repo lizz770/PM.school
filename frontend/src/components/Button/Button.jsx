@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Button.module.scss";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../loadingSpinner";
 
 const Button = ({
   children,

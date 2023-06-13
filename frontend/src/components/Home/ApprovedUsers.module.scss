@@ -1,0 +1,103 @@
+@use "./info_shared";
+.user {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .iconContainer {
+            line-height: 0;
+            padding: 0.5rem;
+            background: var(--color-purple-300);
+            border-radius: 50%;
+            svg {
+                color: var(--color-blue-900);
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+
+        .name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-text);
+        }
+    }
+
+    .approved {
+        background: var(--color-lightBackgroundSvg);
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            display: block;
+            font-weight: 600;
+            color: var(--color-text);
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.container {
+    margin-top: 2rem;
+}
+
+.inner {
+    @include info_shared.containerStyle;
+    .seeMore {
+        @include info_shared.seeMoreStyle;
+    }
+}
+.titleWrapper {
+    @include info_shared.containerTitle($svgSize: 1.7rem, $svgPos: 0px);
+}
+
+.approvedUsers {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .noApprovedUsers {
+        position: relative;
+        min-height: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-text);
+        width: 100%;
+        @media screen and (max-width: 500px) {
+            font-size: 1.1rem;
+        }
+    }
+    .iconWrapper {
+        opacity: 0.3;
+        position: absolute;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        svg {
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(12px -1px 36px var(--color-purple-600));
+            color: var(--color-darkSvg);
+            @media screen and (max-width: 890px) {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}

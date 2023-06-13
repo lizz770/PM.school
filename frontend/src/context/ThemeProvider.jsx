@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 
-export const ThemeContext = createContext({ mode: false, setMode: () => {} });
+const ThemeContext = createContext({ mode: false, setMode: () => {} });
 
 const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(false);
@@ -14,11 +14,11 @@ const ThemeProvider = ({ children }) => {
       setMode(true);
     }
   }, []);
-
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
 const useTheme = () => useContext(ThemeContext);
-export { ThemeProvider, useTheme };
+
+export { ThemeContext, ThemeProvider, useTheme };

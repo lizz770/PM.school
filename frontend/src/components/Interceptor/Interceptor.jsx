@@ -8,13 +8,9 @@ const Interceptor = () => {
       return response;
     },
     (error) => {
-      //Если ответ не авторизовн причина в том что сианс истек или удален
       if (error?.response?.status === UNAUTHORIZED) {
-
-        //Установите для запроса 'ME' значение {authed: false}
-
+        //установить для запроса 'ME' значение false
         queryClient.setQueriesData(["Me"], { authed: false });
-
         //Удалите все запросы, кроме запроса "Me"
         queryClient.removeQueries({
           predicate: (query) => {

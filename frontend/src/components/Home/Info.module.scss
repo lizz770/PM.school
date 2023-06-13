@@ -1,0 +1,135 @@
+@use "./info_shared";
+.container {
+    display: flex;
+    margin-top: 2rem;
+    gap: 5rem;
+    @media screen and (max-width: 945px) {
+        gap: 2.5rem;
+    }
+    @media screen and (max-width: 888px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+
+.commentsWrapper {
+    @include info_shared.containerStyle;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    .seeMore {
+        @include info_shared.seeMoreStyle;
+    }
+}
+
+.commentsTitle {
+    @include info_shared.containerTitle($svgSize: 1.7rem, $svgPos: 0);
+    flex-shrink: 0;
+}
+
+.comments {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+
+    .noMeds {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        min-height: 250px;
+        color: var(--color-text);
+        width: 100%;
+        @media screen and (max-width: 890px) {
+            min-height: 160px;
+        }
+        @media screen and (max-width: 500px) {
+            font-size: 1.1rem;
+        }
+    }
+    .noMedsBg {
+        opacity: 0.3;
+        position: absolute;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        svg {
+            width: 150px;
+            height: 150px;
+            color: var(--color-darkSvg);
+            filter: drop-shadow(12px -1px 36px var(--color-purple-600));
+            @media screen and (max-width: 890px) {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}
+
+
+.comment {
+    @include info_shared.itemStyle;
+}
+
+.risk {
+    .descSpan {
+        display: block;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+    .descP {
+        margin-top: 0.3rem;
+        word-break: normal;
+        &::first-letter {
+            font-size: 1.3rem;
+        }
+    }
+}
+
+.comment {
+    width: 100%;
+    .doseContainer {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.3rem;
+    }
+
+    .instructionsContainer {
+        margin-top: 0.3rem;
+    }
+
+    .descSpan,
+    .doseSpan {
+        display: block;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    .descContainer {
+        width: 100%;
+        p {
+            &::first-letter {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

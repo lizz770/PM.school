@@ -2,25 +2,26 @@ import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import styles from "./Navbar.module.scss";
 import Logo from "../logo";
-
-//иконки импорты иконок
-import{
-    BsFillBellFill,
-    BsArrowRepeat,
-    BsSunFill,
-    BsFillMoonFill,
+//Иконки
+import {
+  BsFillBellFill,
+  BsArrowRepeat,
+  BsSunFill,
+  BsFillMoonFill,
 } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-
 import { useTheme } from "../../context/ThemeProvider";
 import { useMobileNav } from "../../context/MobileNavProvider";
+import SearchModal from "./SearchModal";
+import useClickOutside from "../../hooks/ClickOutside";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../queries/authQueries";
 import { useWhoami } from "../../queries/authQueries";
-import GlobalSpinner from "../GlobalSpinner/GlobalSpinner";
-import useClickOutside from "../../hooks/ClickOutside";
+
+import ResultsDoc from "./ResultsTutor.json";
+import ResultPatient from "./ResultsStudent.json";
 
 const Navbar = ({ user, homePath }) => {
   const { mode, setMode } = useTheme();
@@ -46,7 +47,7 @@ const Navbar = ({ user, homePath }) => {
   const searchResults = (input) => {
     if (input.length > 0) {
       let results;
-      if (me?.user?.userRole === "DOCTOR") {
+      if (me?.user?.userRole === "TUTOR") {
         results = ResultsDoc.filter((result) => {
           return result.text.toLowerCase().includes(input.toLowerCase());
         });
@@ -66,27 +67,26 @@ const Navbar = ({ user, homePath }) => {
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-
-        {/* Верхний навбар */}
+        {/* верняя часть */}
         <div className={styles.top}>
           <div className={`${styles.logoContainer} `}>
             <button
               className={styles.mobileFaBars}
-              title='Меню'
+              title='Menu'
               role='button'
               onClick={() => setIsOpened(true)}
             >
               <FaBars />
             </button>
-            <div className={styles.logoWrapper} title='Дом'>
+            <div className={styles.logoWrapper} title='Home'>
               <Logo homePath={homePath} />
             </div>
           </div>
         </div>
 
-        {/* BOTTOM PART */}
+        {/* Нижняя часть */}
         <div className={styles.btm}>
-          {/* SEARCH */}
+          {/* Поиск */}
           <div
             className={styles.searchContainer}
             ref={searchMenuOutside}
@@ -99,7 +99,7 @@ const Navbar = ({ user, homePath }) => {
                   <input
                     id='searchInput'
                     type='text'
-                    placeholder='Search...'
+                    placeholder='Поиск...'
                     className={styles.topSearchbar}
                     aria-label='Search'
                     value={input}
@@ -131,9 +131,9 @@ const Navbar = ({ user, homePath }) => {
                           <BsArrowRepeat />
                         </div>
                         {input === "" ? (
-                          <span>Search something...</span>
+                          <span>Найти что-нибудь</span>
                         ) : (
-                          <span>No Results</span>
+                          <span>Нет результатов</span>
                         )}
                       </div>
                     )}
@@ -141,11 +141,21 @@ const Navbar = ({ user, homePath }) => {
                 </div>
               )}
             </div>
-            {/* SEARCH MOBILE */}
-           
+            {/* мобильный поиск */}
+            <button
+              className={`${styles.searchInner} ${styles.searchModalBtn}`}
+              onClick={() => setSearchModal(!searchModal)}
+            >
+              <FaSearch title='Search' aria-label='Search' />
+            </button>
+            {/* модель поиска мобильного */}
+            <SearchModal
+              setIsVisible={() => setSearchModal(false)}
+              isVisible={searchModal}
+            />
           </div>
 
-          {/* Светлый темный */}
+          {/* режим черно/белый */}
           <button
             className={styles.themeContainer}
             title='Toggle light/dark mode'
@@ -156,7 +166,7 @@ const Navbar = ({ user, homePath }) => {
             {mode ? <BsSunFill /> : <BsFillMoonFill />}
           </button>
 
-          {/* НАСТРОЙКИ */}
+          {/* Уведомления */}
           <button
             className={`${styles.notificationContainer}`}
             title='Notifications'
@@ -182,7 +192,7 @@ const Navbar = ({ user, homePath }) => {
             <div className={styles.user}>
               <span className={styles.userTop}>{user?.firstName}</span>
               {!userSubmenu ? <MdKeyboardArrowDown /> : <MdKeyboardArrowUp />}
-              {/* ПОЛЬЗОВАТЕЛЬСКОЕ ПОДМЕНЮ */}
+              {/* Пользовательское подменю */}
               <div
                 onClick={(e) => e.stopPropagation()}
                 className={`${styles.submenu} ${
@@ -190,8 +200,7 @@ const Navbar = ({ user, homePath }) => {
                 }`}
               >
                 <div className={styles.info}>
-                  <span className={styles.userName}>{me?.user?.firstName} </span>
-                  <span className={styles.userName}>{me?.user?.lastName}</span>
+                  <span className={styles.userName}>{me?.user?.firstName}</span>
                   <span className={styles.id}>{me?.user?.userRole}</span>
                 </div>
                 <div className={styles.actions}>
@@ -204,7 +213,7 @@ const Navbar = ({ user, homePath }) => {
                       logout();
                     }}
                   >
-                    Выйти 
+                    Выйти
                   </button>
                 </div>
               </div>
@@ -217,6 +226,12 @@ const Navbar = ({ user, homePath }) => {
   );
 };
 
-
+Navbar.defaultProps = {
+  homePath: "/",
+  user: {
+    firstName: "John",
+    lastName: "Doe",
+  },
+};
 
 export default Navbar;

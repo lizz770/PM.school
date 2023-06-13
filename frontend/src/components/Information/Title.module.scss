@@ -1,0 +1,33 @@
+.titleContainer {
+    background: var(--color-lightBackground);
+    border-radius: 14px;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: max(2.3vw, 1.4rem);
+    @media screen and (max-width: 1800px) {
+        padding: 2.8rem;
+    }
+    span {
+        display: block;
+        font-size: 1.65rem;
+        color: var(--color-text);
+        font-weight: 500;
+        @media screen and (max-width: 885px) {
+            font-size: 1.4rem;
+        }
+    }
+    .iconContainer {
+        display: flex;
+        svg {
+            width: 2rem;
+            height: 2rem;
+            color: var(--color-darkSvg);
+            @media screen and (max-width: 885px) {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
+        }
+    }
+}

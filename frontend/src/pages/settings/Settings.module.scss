@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.password {
+    box-shadow: var(--box-shadow);
+    background: var(--color-background-squares);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.actions {
+    box-shadow: var(--box-shadow);
+    background: var(--color-background-squares);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 300px;
+    label {
+        color: var(--color-text);
+        font-size: 0.9rem;
+    }
+    .input {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .inner {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            &:focus-within {
+                box-shadow: 0 0 0 2px rgb(73, 68, 207);
+            }
+            button {
+                display: flex;
+                background: transparent;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                margin-right: 6px;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        input,
+        textarea {
+            padding: 0.5rem;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            resize: none;
+        }
+        textarea {
+            height: 250px;
+        }
+        .error {
+            color: red;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.btns {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}

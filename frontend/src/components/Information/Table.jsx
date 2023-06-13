@@ -3,16 +3,15 @@ import styles from "./Table.module.scss";
 import SideTitle from "./SideTitle";
 import Item from "./Item";
 import { MdDesignServices } from "react-icons/md";
-
-import Button from "../Button";
+import Button from "../button";
 
 const Table = ({ url, titleIcon, title, items, isTutor }) => {
   return (
     <div className={styles.container}>
-      {/* ТАБЛИЦА*/}
+      {/* таблица */}
       <div className={styles.inner}>
         <SideTitle icon={titleIcon}>{title}</SideTitle>
-        {/* ЭЛЕМЕНТЫ ТАБЛИЦЫ */}
+        {/* Элементы */}
         <div
           className={styles.items}
           style={
@@ -24,14 +23,20 @@ const Table = ({ url, titleIcon, title, items, isTutor }) => {
               if (index < 3) return <Item key={index} {...item} />;
             })
           ) : (
-            <div className={styles.noData}>Нет Данных</div>
+            <div className={styles.noData}>Нет доступных данных</div>
           )}
-          {/* ССылки на кнопки для студента*/}
+          {/* кнопка ссылка на студента*/}
           {!isTutor && (
             <Button isLink to={url} align='center' mt={16} mb={16} size='md'>
-              {`${items?.length > 0 ? "Увидеть больше" : "Добавить данные"}`}
+              {`${items?.length > 0 ? "Посмотреть" : "Добавить данные"}`}
             </Button>
           )}
+          {/* BUTTON LINKS FOR TutorS*/}
+          {/* {isTutor && items?.length > 0 && (
+            <Button isLink to={url} align='center' mt={16} mb={16} size='md'>
+              See More
+            </Button>
+          )} */}
         </div>
       </div>
     </div>
@@ -47,20 +52,20 @@ Table.defaultProps = {
   children: null,
   items: [
     {
+      label: "Удивительный искусственный свет",
       
-      value: "Основы дизайна",
       unitColor: "grey",
       date: "2021-05-01",
     },
     {
+      label: "Прекрасен мир и мировоздание!",
       
-      value: "Профессиональная индустрия",
       unitColor: "grey",
       date: "2021-05-01",
     },
     {
+      label: "Прекрасен мир и мировоздание!",
       
-      value: "Красивое и прекрасное",
       unitColor: "grey",
       date: "2021-05-01",
     },

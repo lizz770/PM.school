@@ -1,0 +1,97 @@
+.container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 1420px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.outerContainer {
+    border-radius: 12px;
+    background: var(--color-background-squares);
+    box-shadow: 5px 5px 15px -1px rgb(0 0 0 / 22%);
+    padding: 1.8rem 0rem;
+    padding-left: 2.3rem;
+    width: 360px;
+    @media screen and (max-width: 1420px) {
+        width: unset;
+    }
+
+    .patients,
+    .prescriptions,
+    .risks {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        --icon-size: 2.4rem;
+        .iconContainer {
+            line-height: 0;
+            padding: 0.3rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+
+            svg {
+                width: var(--icon-size);
+                height: var(--icon-size);
+            }
+        }
+        .num {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+
+    .patients {
+        .iconContainer {
+            background: rgb(252, 240, 242);
+            svg {
+                color: rgb(216, 97, 93);
+            }
+        }
+        .num {
+            color: rgb(216, 97, 93);
+        }
+    }
+
+    .prescriptions {
+        .iconContainer {
+            background: rgb(238, 243, 252);
+            svg {
+                color: rgb(114, 153, 236);
+            }
+        }
+        .num {
+            color: rgb(114, 153, 236);
+        }
+    }
+
+    .risks {
+        .iconContainer {
+            background: rgb(255, 255, 195);
+            svg {
+                color: rgb(82, 82, 0);
+            }
+        }
+        .num {
+            color: rgb(82, 82, 0);
+        }
+    }
+
+    .slogan {
+        span {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--color-text);
+        }
+        p {
+            font-size: 0.8rem;
+            color: var(--color-text-sm);
+            width: 80%;
+            line-height: 1.3;
+        }
+    }
+}

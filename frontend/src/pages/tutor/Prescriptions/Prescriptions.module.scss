@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.prescriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 12px;
+}

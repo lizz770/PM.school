@@ -1,1 +1,1 @@
- export {default} from "./MobileNavbar"
+export { default } from "./MobileNavbar";

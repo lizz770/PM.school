@@ -1,47 +1,53 @@
-import React from "react";
-import Button from "../../../components/Button";
-import { useWhoami, useLogout } from "../../../queries/authQueries";
-import { useDeleteAccount } from "../../../queries/accountQueries";
-import styles from "./Home.module.scss";
-import { useMobileNav } from "../../../context/MobileNavProvider";
-import Message from "../../../components/Home/Message";
-import Statistics from "../../../components/Home/Statistic";
-
+import React, { Fragment } from "react";
+import Message from "../../../components/home/Message";
+import Statistics from "../../../components/home/Statistics";
+import Info from "../../../components/home/Info";
+import ApprovedUsers from "../../../components/home/ApprovedUsers";
+import { useWhoami } from "../../../queries/authQueries";
+import { useHomeStats } from "../../../queries/accountQueries";
 
 const Home = () => {
-  const { data, isLoading } = useWhoami();
-  const { mutate: logout, isLoading: loggingOut } = useLogout();
-  const { mutate: deleteAccount, deletingAcc } = useDeleteAccount();
-
-  const {isOpened, setIsOpened} = useMobileNav();
+  const { data: me } = useWhoami();
+  const {
+    data: stats,
+    refetch: refetchStats,
+    isLoading: statsLoading,
+    isRefetching: statsRefetching,
+  } = useHomeStats();
 
   return (
-    <div className={styles.container}>
-      <Message fName={data?.user?.firstName}/>
-      <Statistics/>
-      <h2>{data?.user?.userRole}</h2>
-      <div className={styles.btns}>
-        <Button
-          disabled={loggingOut || deletingAcc}
-          isLoading={loggingOut}
-          onClick={() => {
-            logout();
-          }}
-        >
-          Выйти
-        </Button>
-        <Button
-          disabled={loggingOut || deletingAcc}
-          isLoading={deletingAcc}
-          onClick={() => {
-            deleteAccount();
-          }}
-        >
-          Удалить аккаунт
-        </Button>
-        <Button onClick={() => setIsOpened(!isOpened)}>Открыть меню</Button>
-      </div>
-    </div>
+    <Fragment>
+      <Message fName={me?.user?.firstName} refetch={() => refetchStats()} />
+      <Statistics
+        bp={{
+          sys: stats?.Mediadesign[0]?.title,
+        }}
+        hr={stats?.PhotoProduction[0]?.title}
+        tp={stats?.VideoProduction[0]?.title}
+        isLoading={statsLoading || statsRefetching}
+      />
+      <Info
+        meds={stats?.Prescriptions}
+        isLoading={statsLoading || statsRefetching}
+      />
+      <ApprovedUsers
+        user={me?.user}
+        approvedUsers={
+          stats
+            ? [
+                ...stats?.Tutors?.map((tutor) => {
+                  return {
+                    firstName: tutor?.tutor?.firstName,
+                    lastName: tutor?.tutor?.lastName,
+                    status: tutor?.status,
+                  };
+                }),
+              ]
+            : []
+        }
+        isLoading={statsLoading || statsRefetching}
+      />
+    </Fragment>
   );
 };
 

@@ -1,13 +1,13 @@
-import React from "react";
-import styles from "./BigInput.module.scss";
+import styles from "./LoginInput.module.scss";
 
-const BigInput = ({
+const LoginInput = ({
   label,
   htmlFor,
   type,
   name,
   autocomplete,
   placeholder,
+  value,
   onChange,
   err,
   register,
@@ -21,6 +21,7 @@ const BigInput = ({
           name={name}
           autoComplete={autocomplete}
           placeholder={placeholder}
+          
           onChange={onChange}
           {...register}
         />
@@ -30,14 +31,14 @@ const BigInput = ({
   );
 };
 
-BigInput.defaultProps = {
+LoginInput.defaultProps = {
   label: "Email",
   htmlFor: undefined,
   type: undefined,
   autocomplete: undefined,
-  placeholder: "Введите адрес электронной почты",
+  placeholder: "Введите вашу почту",
+  value: "",
   onChange: () => {},
   err: "",
 };
-
-export default BigInput;
+export default LoginInput;

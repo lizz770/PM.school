@@ -1,16 +1,18 @@
-import React from "react";
 import styles from "./Layout.module.scss";
 import { MobileNavProvider } from "../../context/MobileNavProvider";
+import { PagesFiltersProvider } from "../../context/PagesFiltersProvider";
+
 const Layout = ({ children, navbar, mobileNavbar }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.layout}>
       <MobileNavProvider>
-      {mobileNavbar}
-      {navbar}
-      {children}
+        <PagesFiltersProvider>
+          {mobileNavbar}
+          {navbar}
+          {children}
+        </PagesFiltersProvider>
       </MobileNavProvider>
     </div>
-
   );
 };
 

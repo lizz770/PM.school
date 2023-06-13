@@ -1,4 +1,4 @@
-import { queryClient, axios } from "../config/config.js";
+import { queryClient, axios } from "../config/config";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 const deleteAccount = async () => {

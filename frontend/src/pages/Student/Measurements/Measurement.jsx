@@ -2,7 +2,7 @@ import styles from "./Measurement.module.scss";
 import {
   useGetMeasurement,
   useDeleteMeasurement,
-} from "../../../queries/measurementQueries.js";
+} from "../../../queries/measurementQueries";
 import { useParams } from "react-router-dom";
 import {
   createColumnHelper,
@@ -12,8 +12,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useState, useEffect, useReducer } from "react";
-import GlobalSpinner from "../../../components/GlobalSpinner";
-import Button from "../../../components/Button";
+import GlobalSpinner from "../../../components/globalSpinner";
+import Button from "../../../components/button";
 import SkeletonTable from "./SkeletonTable";
 import PostModal from "./PostModal";
 
@@ -31,7 +31,7 @@ const Measurement = () => {
   const { mutate: deleteMeasurement, isLoading: isDeleting } =
     useDeleteMeasurement();
 
-  
+  // const rerender = useReducer(() => ({}), {})[1];
   const columnHelper = createColumnHelper();
   const [columns, setColumns] = useState([]);
   const [sorting, setSorting] = useState([]);
@@ -39,10 +39,10 @@ const Measurement = () => {
   useEffect(() => {
     if (data) {
       const measurementData = data[`${measurement}s`];
-      //получить ключи объекта measurement в массиве
+      //получить ключи объекта измерения в массиве
       let keys;
       if (measurementData.length > 0) keys = Object?.keys(measurementData[0]);
-      //удалить id и ключ measurementId если они существуют
+      //удалите id и ключ идентификатора измерения, если он существует
       const filteredKeys = keys?.filter(
         (key) => key !== "id" && key !== `measurementsId`
       );
@@ -100,7 +100,7 @@ const Measurement = () => {
                     </th>
                   );
                 })}
-                <th>Удалить</th>
+                <th>Действие</th>
               </tr>
             ))}
           </thead>
@@ -131,7 +131,9 @@ const Measurement = () => {
                         id: row?.original?.id,
                       })
                     }
-                  > Удалить </Button>
+                  >
+                    Удалить
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -145,12 +147,16 @@ const Measurement = () => {
         <Button onClick={() => refetch()}>
           <span
             style={{ color: "whitesmoke", width: "100px", display: "block" }}
-          > Обновить</span>
+          >
+            Обновить
+          </span>
         </Button>
         <Button onClick={() => setIsOpen(true)}>
           <span
             style={{ color: "whitesmoke", width: "100px", display: "block" }}
-          >Добавить</span>
+          >
+            Добавить
+          </span>
         </Button>
 
         <PostModal

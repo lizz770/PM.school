@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "link": "/settings",
+        "text": "Settings"
+    },
+    {
+        "id": 2,
+        "link": "/prescriptions",
+        "text": "FeedBack"
+    },
+    {
+        "id": 3,
+        "link": "/tutors",
+        "text": "tutors"
+    },
+    {
+        "id": 4,
+        "link": "/notifications",
+        "text": "Настройки"
+    },
+    {
+        "id": 5,
+        "link": "/info",
+        "text": "информация пользователя"
+    },
+    {
+        "id": 6,
+        "link": "/info/post",
+        "text": "Информация о публикации"
+    },
+    {
+        "id": 7,
+        "link": "/stats",
+        "text": "Статистика"
+    }
+]

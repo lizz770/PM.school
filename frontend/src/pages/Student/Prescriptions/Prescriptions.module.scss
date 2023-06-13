@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pending,
+.prescriptions {
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+        font-size: 1.1rem;
+        color: var(--color-text);
+        font-weight: 500;
+    }
+}
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--color-background-squares);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.noResults {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 500;
+}

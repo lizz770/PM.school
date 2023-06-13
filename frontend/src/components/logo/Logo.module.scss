@@ -41,13 +41,13 @@
         background: rgba(204, 204, 204, 0.823);
 
         filter: blur(20rem);
-        &::before {
-             position: absolute;
-             width: 150%;
-             top: 0;
-             left: -25%;
-             border-top: 1rem solid rgb(255, 255, 255);
-             content: "";
-         }
+        // &::before {
+        //     position: absolute;
+        //     width: 150%;
+        //     top: 0;
+        //     left: -25%;
+        //     border-top: 1rem solid rgb(255, 255, 255);
+        //     content: "";
+        // }
     }
 }
