@@ -1,15 +1,15 @@
 import { Router } from "express";
 
 //Схемы
-import mediadesignSchema from "../schemas/measurementSchemas/mediaDesignSchema.js";
-import photoProductionSchema from "../schemas/measurementSchemas/photoProductionSchema.js";
+import mediadesignSchema from "../schemas/measurementSchemas/mediadesignSchema.js";
+import photoProductionSchema  from "../schemas/measurementSchemas/photoProductionSchema.js";
 import videoProductionSchema from "../schemas/measurementSchemas/videoProductionSchema.js";
 
-//контролерры
+//контроллеры
 import * as studentController from "../controllers/studentController.js";
 import * as measurementController from "../controllers/measurementController.js";
 
-//промежуточные файлы оч важные
+
 import isStudent from "../middlewares/isStudent.js";
 import requiresAuth from "../middlewares/requiresAuth.js";
 import validateRequestBody from "../middlewares/validateBody.js";
@@ -23,62 +23,64 @@ const VIDEOPRODUCTION_PATH = "videoproduction";
 
 router.use(requiresAuth);
 
-
-//медиадизайн 
 router.post(
   `${M_PREFIX}/${MEDIADESIGN_PATH}`,
   isStudent,
   validateRequestBody(mediadesignSchema),
   measurementController.postMediadesign
 );
+
 router.get(
   `${M_PREFIX}/${MEDIADESIGN_PATH}`,
   isStudent,
   measurementController.getMediadesign
 );
+
 router.delete(
   `${M_PREFIX}/${MEDIADESIGN_PATH}`,
   isStudent,
   measurementController.deleteMediadesign
 );
 
-//фото-продакшн
 router.post(
   `${M_PREFIX}/${PHOTOPRODUCTION_PATH}`,
   isStudent,
-  validateRequestBody(photoProductionSchema),
+  validateRequestBody(photoProductionSchema ),
   measurementController.postPhotoProduction
 );
+
 router.get(
   `${M_PREFIX}/${PHOTOPRODUCTION_PATH}`,
   isStudent,
   measurementController.getPhotoProduction
 );
+
 router.delete(
   `${M_PREFIX}/${PHOTOPRODUCTION_PATH}`,
   isStudent,
   measurementController.deletePhotoProduction
 );
 
-//видеопродакшн
 router.post(
   `${M_PREFIX}/${VIDEOPRODUCTION_PATH}`,
   isStudent,
   validateRequestBody(videoProductionSchema),
   measurementController.postVideoProduction
 );
+
 router.get(
   `${M_PREFIX}/${VIDEOPRODUCTION_PATH}`,
   isStudent,
   measurementController.getVideoProduction
 );
+
 router.delete(
   `${M_PREFIX}/${VIDEOPRODUCTION_PATH}`,
   isStudent,
   measurementController.deleteVideoProduction
 );
 
-//фидбэкк
+
 router.get(
   `${STUDENT_PATH}/prescriptions`,
   isStudent,

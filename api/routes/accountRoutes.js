@@ -2,8 +2,9 @@ import { Router } from "express";
 import * as accountController from "../controllers/accountController.js";
 import validateRequestBody from "../middlewares/validateBody.js";
 import loginSchema from "../schemas/accountSchemas/loginSchema.js";
-import registerSchema from "../schemas/accountSchemas/registerShema.js";
+import registerSchema from "../schemas/accountSchemas/registerSchema.js";
 import requiresAuth from "../middlewares/requiresAuth.js";
+import changePasswordSchema from "../schemas/accountSchemas/changePasswordSchema.js";
 
 const router = Router();
 
@@ -26,6 +27,11 @@ router.delete("/me/delete", requiresAuth, accountController.deleteAccount);
 
 router.get("/me/home", requiresAuth, accountController.getHomeStats);
 
-
+router.patch(
+  "/me/password",
+  requiresAuth,
+  validateRequestBody(changePasswordSchema),
+  accountController.changePassword
+);
 
 export default router;

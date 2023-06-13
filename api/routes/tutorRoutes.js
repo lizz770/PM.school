@@ -25,11 +25,11 @@ router.get(
 router.post(
   `${TUTOR_PATH}/prescription`,
   validateRequestBody(postPrescriptionSchema),
-  tutorController.postStudentPrescription
+  tutorController.poststudentPrescription
 );
 router.delete(
   `${TUTOR_PATH}/prescription`,
-  tutorController.deleteStudentPrescription
+  tutorController.deletestudentPrescription
 );
 
 export default router;
