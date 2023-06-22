@@ -4,16 +4,32 @@ import { FaTimes } from "react-icons/fa";
 import styles from "./PostModal.module.scss";
 import { usePostMeasurement } from "../../../queries/measurementQueries";
 import Button from "../../../components/button";
-
+import UploadWidget from '../../../components/Upload/UploadWidget';
 Modal.setAppElement("#root");
 
 const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
-  useEffect(() => {
-    setInputs((prev) => ({ [measurement]: 0 }));
-    measurement === "videoProduction" &&
-      setInputs((prev) => ({ title: 0, video: 0 }));
-  }, []);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    mutate: post,
+  } = usePostMeasurement(measurement);
+  const [url, updateUrl] = useState();
+  const [updateError] = useState();
+  
 
+  function handleOnUpload(error, result, widget) {
+    if ( error ) {
+      updateError(error);
+      widget.close({
+        quiet: true
+      });
+      return;
+    }
+    updateUrl(result?.info?.secure_url);
+  }
+  
   switch (measurement) {
     case "mediadesign":
       return (
@@ -43,17 +59,28 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
             }
           />
           <label htmlFor='image'>Изображение</label>
-          <input
-            type='string'
-            name='image'
-            id='image'
-            onChange={(e) =>
-              setInputs({
-                ...inputs,
-                image: e.target.value,
-              })
+          <UploadWidget 
+          onUpload={handleOnUpload}>
+          {({ open }) => {
+            function handleOnClick(e) {
+              e.preventDefault();
+              open();
             }
-          />
+            return (
+              <Button 
+              onClick={handleOnClick}
+              onChange={(e) =>
+                setInputs({
+                  ...inputs,
+                  image: e.target.value,
+                })
+              }
+              >
+                Загрузить изображение
+              </Button>
+            )
+          }}
+        </UploadWidget>
         </div>
         
       );
@@ -158,8 +185,9 @@ const PostModal = ({ measurement, modalIsOpen, setIsOpen }) => {
     error,
     mutate: post,
   } = usePostMeasurement(measurement);
-
   const [inputs, setInputs] = useState();
+
+  
 
   return (
     <Modal

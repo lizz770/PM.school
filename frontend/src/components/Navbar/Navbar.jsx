@@ -14,7 +14,6 @@ import { MdContentPaste } from "react-icons/md";
 //nav
 import { FaTimes, FaBars } from "react-icons/fa";
 import { IoSettingsOutline, IoPeopleOutline } from "react-icons/io5";
-import { IoWarningOutline } from "react-icons/io5";
 import { HiOutlineRefresh } from "react-icons/hi";
 
 import { useLogout } from "../../queries/authQueries";
@@ -64,7 +63,7 @@ const Navbar = ({ role }) => {
         <NavUrl url='/' title='Home' icon={<AiOutlineHome />} tabIndex={1} />
         <NavUrl
           url='/information'
-          title='Info'
+          title='Информация'
           icon={<MdContentPaste/>}
           tabIndex={2}
         />
@@ -82,13 +81,13 @@ const Navbar = ({ role }) => {
         />
         <NavUrl
           url='/prescriptions'
-          title='Prescriptions'
+          title='Обратная связь'
           icon={<IoSchoolOutline />}
           tabIndex={5}
         />
         <NavUrl
           url='/settings'
-          title='Settings'
+          title='Настройки'
           icon={<IoSettingsOutline />}
           tabIndex={6}
         />

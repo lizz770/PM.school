@@ -35,15 +35,26 @@ const Home = () => {
         approvedUsers={
           stats
             ? [
-                ...stats?.Tutors?.map((tutor) => {
-                  return {
-                    firstName: tutor?.tutor?.firstName,
-                    lastName: tutor?.tutor?.lastName,
-                    status: tutor?.status,
-                  };
-                }),
+              {
+                firstName:"",
+                lastName: "",
+                status:"PENDING",
+                      
+              }
+                // ...stats?.Tutors?.map((tutor) => {
+                //   return {
+                //     firstName: tutor?.tutor?.firstName,
+                //     lastName: tutor?.tutor?.lastName,
+                //     status: tutor?.status,
+                //   };
+                // }),
               ]
-            : []
+            : [{
+              firstName:"",
+              lastName: "",
+              status:"PENDING",
+                    
+            }]
         }
         isLoading={statsLoading || statsRefetching}
       />

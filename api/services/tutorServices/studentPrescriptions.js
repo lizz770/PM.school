@@ -27,7 +27,7 @@ const getStudentPrescriptions = async (req, res, next) => {
             PrescribedBy: {
               id:
                 by === "ALL"
-                  ? undefined
+                  ? undefined 
                   : by === "ME"
                   ? req.session.userId
                   : by,
