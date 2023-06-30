@@ -1,9 +1,9 @@
 import express from "express";
+import multer from 'multer';
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import expressSession from "express-session";
 
 import prisma from "./constants/config.js";
-
 import cors from "cors";
 import accountRoutes from "./routes/accountRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
@@ -14,6 +14,19 @@ import studentRoutes from "./routes/studentRoutes.js";
 const app = express();
 const PORT = 3000;
 
+//хранилище для изображений 
+const storage = multer.diskStorage({
+  //путь куда сохраняем картинки в папку uploads
+  destination: (_, __, cb)=>{
+    cb(null,'uploads');
+  },
+  //название файла
+  filename: (_, file, cb)=>{
+    cb(null, file.originalname);
+  },
+})
+//объясняем экспрессу
+const upload = multer({ storage });
 app.use(
   cors({
     origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -49,6 +62,17 @@ app.use("/api", requestRoutes);
 app.use("/api", trustedUsersRoutes);
 app.use("/api", studentRoutes);
 app.use("/api", tutorRoutes);
+
+//есть ли в этой папке то что я передаю
+app.use('/api/uploads',express.static('uploads'))
+
+//запрос на загрузку ссылка на картинку
+app.post('/api/upload', upload.single('image'),(req,res)=>{
+  res.json({
+    //из запроса вытаскиваем файл и его оригинальное название
+    url:`uploads/${req.file.originalname}`
+  });
+})
 
 app.listen(PORT, (error) => {
   if (error) {

@@ -48,7 +48,7 @@ const Login = () => {
           <div className={styles.formWrapper}>
             <form action='submit' onSubmit={handleSubmit(Login)}>
               <LoginInput
-                label='Email:'
+                label='Почта:'
                 htmlFor='email'
                 type='email'
                 autocomplete='email'
@@ -57,7 +57,7 @@ const Login = () => {
                 register={register("email", { required: true })}
               />
               <LoginInput
-                label='Password:'
+                label='Пароль:'
                 htmlFor='password'
                 type='password'
                 name='password'

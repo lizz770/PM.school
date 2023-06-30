@@ -17,7 +17,7 @@ import { IoSettingsOutline, IoPeopleOutline } from "react-icons/io5";
 import { HiOutlineRefresh } from "react-icons/hi";
 
 import { useLogout } from "../../queries/authQueries";
-import GlobalSpinner from "../globalSpinner";
+import GlobalSpinner from "../../components/GlobalSpinner";
 
 const NavUrl = ({ url, icon, title, tabIndex }) => {
   return (
@@ -69,7 +69,7 @@ const Navbar = ({ role }) => {
         />
         <NavUrl
           url={`${role === "STUDENT" ? "/tutors" : "/students"}`}
-          title={`${role === "STUDENT" ? "Tutors" : "Students"}`}
+          title={`${role === "STUDENT" ? "Кураторы" : "Студенты"}`}
           icon={<IoPeopleOutline />}
           tabIndex={3}
         />

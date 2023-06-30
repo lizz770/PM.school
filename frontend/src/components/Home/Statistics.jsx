@@ -20,8 +20,8 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
               <MdDesignServices />
             </div>
             <span className={styles.value}>
-              {hr && !isLoading ? (
-                `${hr}`
+              {bp.sys && !isLoading ? (
+                `${bp.sys}`
               ) : isLoading ? (
                 <LoadingSpinner size={20} />
               ) : (
@@ -31,7 +31,7 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
           </div>
           <span className={styles.title}>Медиа Дизайн</span>
           <p className={styles.info}>
-          Проектирование контента для публикации на различных площадках и в различных контекстах.
+          Создание и Проектирование визуальных элементов и контента для различных медиа-платформ
           </p>
         </div>
       </div>
@@ -43,8 +43,8 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
               <MdOutlineInsertPhoto />
             </div>
             <span className={styles.value}>
-              {tp && !isLoading ? (
-                `${tp}`
+              {hr && !isLoading ? (
+                `${hr}`
               ) : isLoading ? (
                 <LoadingSpinner size={20} />
               ) : (
@@ -52,9 +52,9 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
               )}
             </span>
           </div>
-          <span className={styles.title}>Фотопродакшн</span>
+          <span className={styles.title}>Фото-продакшн</span>
           <p className={styles.info}>
-          Полный цикл создания рекламного сюжета, на основе идеи, которая обсуждается и оговаривается изначально.
+          Фокус на создании и производстве фотографий с использованием различных техник и композиций
           </p>
         </div>
       </div>
@@ -67,8 +67,8 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
               <TfiVideoClapper />
             </div>
             <span className={styles.value}>
-              {bp.sys  && !isLoading ? (
-                `${bp.sys}`
+              {tp && !isLoading ? (
+                `${tp}`
               ) : isLoading ? (
                 <LoadingSpinner size={20} />
               ) : (
@@ -78,7 +78,7 @@ const Statistics = ({ hr, tp, bp, isLoading }) => {
           </div>
           <span className={styles.title}>Видеопродакшн</span>
           <p className={styles.info}>
-          Услуга, позволяющая создавать видео для разных целей.
+          Связан с созданием и производством видеоматериалов.
           </p>
         </div>
       </div>

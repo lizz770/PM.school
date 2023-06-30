@@ -38,12 +38,12 @@ const ForgotPassword = () => {
               err={errors?.email?.message}
             />
             <div className={styles.btnContainer}>
-              <Button type='submit'>Submit</Button>
+              <Button type='submit'>Отправить</Button>
             </div>
           </form>
           <div className={styles.signin}>
             <span>
-              Go back to <Link to='/login'>Страница входа</Link>
+              Вернутся обратно <Link to='/login'>Страница входа</Link>
             </span>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { FaTimes } from "react-icons/fa";
 import styles from "./PostModal.module.scss";
 import { usePostMeasurement } from "../../../queries/measurementQueries";
 import Button from "../../../components/button";
-import UploadWidget from '../../../components/Upload/UploadWidget';
 Modal.setAppElement("#root");
 
 const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
@@ -17,7 +16,17 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
   } = usePostMeasurement(measurement);
   const [url, updateUrl] = useState();
   const [updateError] = useState();
+  const inputFileRef = React.useRef(null);
+
+
+  const [selectedImage, setSelectedImage] = useState(null);
   
+  const handleImageUpload = (files) => {
+    const imageFile = files[0];
+    setSelectedImage(URL.createObjectURL(imageFile));
+    // Здесь вы можете выполнить другие операции с загруженным изображением, например, отправить его на сервер
+  };
+
 
   function handleOnUpload(error, result, widget) {
     if ( error ) {
@@ -29,6 +38,8 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
     }
     updateUrl(result?.info?.secure_url);
   }
+
+  
   
   switch (measurement) {
     case "mediadesign":
@@ -36,7 +47,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
         <div className={styles.input_wrapper}>
           <label htmlFor='title'>Название</label>
           <input
-            type='string'
+            type='text'
             name='title'
             id='title'
             onChange={(e) =>
@@ -48,7 +59,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
           />
           <label htmlFor='description'>Описание:</label>
           <input
-            type='string'
+            type='text'
             name='description'
             id='description'
             onChange={(e) =>
@@ -59,28 +70,17 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
             }
           />
           <label htmlFor='image'>Изображение</label>
-          <UploadWidget 
-          onUpload={handleOnUpload}>
-          {({ open }) => {
-            function handleOnClick(e) {
-              e.preventDefault();
-              open();
+          <input
+            type='text'
+            name='image'
+            id='image'
+            onChange={(e) =>
+              setInputs({
+                ...inputs,
+                image: e.target.value,
+              })
             }
-            return (
-              <Button 
-              onClick={handleOnClick}
-              onChange={(e) =>
-                setInputs({
-                  ...inputs,
-                  image: e.target.value,
-                })
-              }
-              >
-                Загрузить изображение
-              </Button>
-            )
-          }}
-        </UploadWidget>
+          />
         </div>
         
       );
@@ -89,7 +89,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
         <div className={styles.input_wrapper}>
           <label htmlFor='title'>Название</label>
           <input
-            type='string'
+            type='text'
             name='title'
             id='title'
             style={{ marginBottom: "1rem" }}
@@ -103,7 +103,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
 
           <label htmlFor='description'>Описание</label>
           <input
-            type='string'
+            type='text'
             name='description'
             id='description'
             onChange={(e) =>
@@ -115,7 +115,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
           />
           <label htmlFor='image'>Изображение</label>
           <input
-            type='string'
+            type='text'
             name='image'
             id='image'
             onChange={(e) =>
@@ -132,7 +132,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
         <div className={styles.input_wrapper}>
           <label htmlFor='title'>Название</label>
           <input
-            type='string'
+            type='text'
             name='title'
             id='title'
             style={{ marginBottom: "1rem" }}
@@ -146,7 +146,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
 
           <label htmlFor='description'>Описание</label>
           <input
-            type='string'
+            type='text'
             name='description'
             id='description'
             onChange={(e) =>
@@ -158,7 +158,7 @@ const MeasurementInputs = ({ measurement, inputs, setInputs }) => {
           />
           <label htmlFor='video'>Видео</label>
           <input
-            type='string'
+            type='text'
             name='video'
             id='video'
             onChange={(e) =>

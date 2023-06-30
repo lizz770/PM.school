@@ -12,7 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useState, useEffect } from "react";
-import GlobalSpinner from "../../../components/globalSpinner";
+import GlobalSpinner from "../../../components/GlobalSpinner";
 import Button from "../../../components/button";
 import SkeletonTable from "./SkeletonTable";
 
@@ -108,6 +108,20 @@ const Measurement = () => {
             {table?.getRowModel()?.rows?.map((row) => (
               <tr key={row.id}>
                 {row?.getVisibleCells()?.map((cell) => {
+                  if (cell.column.id === "image"){
+                    const imageValue = cell.renderValue();
+                    console.log(imageValue)
+                    if (imageValue) {
+                      return (
+                        <td key={cell.id}>
+                          <img src={imageValue}
+                           alt="Изображение"
+                            />
+                        </td>
+                        
+                      );
+                    }
+                  }
                   if (cell.column.id === "createdAt")
                     return (
                       <td key={cell.id}>

@@ -52,7 +52,7 @@ const MobileNavbar = ({ role }) => {
         <NavUrl url='/' title='Home' icon={<AiOutlineHome />} tabIndex={1} />
         <NavUrl
           url='/information'
-          title='Info'
+          title='Информация'
           icon={<MdContentPaste />}
           tabIndex={2}
         />
@@ -64,13 +64,13 @@ const MobileNavbar = ({ role }) => {
         />
         <NavUrl
           url='/requests'
-          title='Requests'
+          title='Запросы'
           icon={<HiOutlineRefresh />}
           tabIndex={4}
         />
         <NavUrl
           url='/prescriptions'
-          title='FeedBack'
+          title='Обратная связь'
           icon={<IoSchoolOutline />}
           tabIndex={5}
         />

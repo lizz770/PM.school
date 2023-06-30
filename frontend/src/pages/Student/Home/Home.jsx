@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Message from "../../../components/home/Message";
-import Statistics from "../../../components/home/Statistics";
+import Statistics from "../../../components/Home/Statistics";
 import Info from "../../../components/home/Info";
 import ApprovedUsers from "../../../components/home/ApprovedUsers";
 import { useWhoami } from "../../../queries/authQueries";

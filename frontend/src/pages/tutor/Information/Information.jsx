@@ -8,9 +8,7 @@ import { HiOutlinePhotograph} from "react-icons/hi";
 //камера
 import { BsCameraVideo } from "react-icons/bs";
 //статьи дизайн
-import { MdDesignServices } from "react-icons/md";
-import { TbTemperature } from "react-icons/tb";
-import { MdOutlineWaterDrop } from "react-icons/md";
+
 import LoadingSpinnerSquare from "../../../components/loadingSpinnerSquare/LoadingSpinnerSquare";
 import { useGetStudentOverview } from "../../../queries/tutorQueries";
 import FilterWrapper from "../../../components/filterWrapper";
@@ -69,7 +67,7 @@ const Information = () => {
             items={
               studentOverview?.mediadesign?.map((item) => {
                 return {
-                  value: item?.title,
+                  value: item?.title&& item?.description ,
                   unitColor: "#6aa84f",
                   date: item?.updatedAt,
                 };

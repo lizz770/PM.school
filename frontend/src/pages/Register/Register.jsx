@@ -41,14 +41,14 @@ const Register = () => {
               <div className={styles.nameContainer}>
                 <div className={styles.nameInner}>
                   <Input
-                    label='First Name:'
+                    label='Имя'
                     htmlFor='fname'
                     placeholder='Имя'
                     register={register("firstName", { required: true })}
                     err={errors?.firstName?.message}
                   />
                   <Input
-                    label={"Last Name:"}
+                    label={"Фамилия"}
                     htmlFor={"lname"}
                     placeholder={"Фамилия"}
                     register={register("lastName", { required: true })}
@@ -59,7 +59,7 @@ const Register = () => {
 
               {/* EMAIL */}
               <Input
-                label='Email:'
+                label='Почта'
                 htmlFor='email'
                 type='email'
                 autoComplete='email'
@@ -70,7 +70,7 @@ const Register = () => {
 
               {/* PASSWORD */}
               <Input
-                label='Password:'
+                label='Пароль'
                 htmlFor='password'
                 type='password'
                 autoComplete='current-password'
@@ -81,7 +81,7 @@ const Register = () => {
 
               {/* CONFIRM PASSWORD */}
               <Input
-                label='Confirm Password:'
+                label='Подтверждение пароля'
                 htmlFor='confirmPassword'
                 type='password'
                 autoComplete='current-password'
@@ -91,7 +91,7 @@ const Register = () => {
               />
 
               <div className={styles.roleContainer}>
-                <label htmlFor='role'>Role :</label>
+                <label htmlFor='role'>Роль :</label>
                 <dir className={styles.selectContainer}>
                   <select name='role' {...register("role", { required: true })}>
                     <option value='STUDENT'>Студент</option>
